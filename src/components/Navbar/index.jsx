@@ -1,6 +1,7 @@
 import {useState} from "react";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {uesAuthContext} from "../../context/AuthContext";
+import {LogoLightMode} from "../../assets/images";
 
 const Navbar = () => {
   const {user, logOutUser} = uesAuthContext();
@@ -23,16 +24,12 @@ const Navbar = () => {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" className="flex items-center">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8 mr-3"
-            alt="Flowbite Logo"
-          />
+        <Link to="/" className="flex items-center">
+          <img src={LogoLightMode} className="h-16 mr-3" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
+            PixelLensAcademy
           </span>
-        </a>
+        </Link>
         <button
           onClick={toggleMobileMenu}
           data-collapse-toggle="navbar-default"
@@ -79,36 +76,14 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/services"
-                className={({isActive}) =>
-                  isActive ? navItemActiveStyle : navItemStyle
-                }>
-                Services
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/contact"
-                className={({isActive}) =>
-                  isActive ? navItemActiveStyle : navItemStyle
-                }>
-                Contact
-              </NavLink>
-            </li>
-            <li>
               {user?.email ? (
                 <button onClick={handleLoggedOut} className="btn">
                   Logout
                 </button>
               ) : (
-                <NavLink
-                  to="/login"
-                  className={({isActive}) =>
-                    isActive ? navItemActiveStyle : navItemStyle
-                  }>
-                  Login
-                </NavLink>
+                <Link to="/login">
+                  <button className="btn">Login</button>
+                </Link>
               )}
             </li>
           </ul>

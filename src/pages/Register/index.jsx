@@ -3,6 +3,8 @@ import {updateProfile} from "@firebase/auth";
 import {auth} from "../../config/firebase";
 import {useForm} from "react-hook-form";
 import {uesAuthContext} from "../../context/AuthContext";
+import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 
 const Register = () => {
   const {createUser, logInUserWithGoogle} = uesAuthContext();
@@ -84,99 +86,105 @@ const Register = () => {
   };
 
   return (
-    <section className="flex items-center justify-center h-screen">
-      <div className="shadow border p-8 rounded-lg md:w-[450px] relative">
-        <h2 className="font-bold text-2xl">Register Your Account</h2>
-        <div className="mt-4 flex items-center justify-center">
-          <button
-            onClick={handleLoginWithGoogle}
-            type="button"
-            className="py-1 ps-2 pe-4 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-600 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-            <img
-              src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-              alt="google"
-              className="w-8 h-8 inline-block"
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <section className="flex items-center justify-center min-h-[900px]">
+        <div className="shadow border p-8 rounded-lg md:w-[450px] relative">
+          <h2 className="font-bold text-2xl">Register Your Account</h2>
+          <div className="mt-4 flex items-center justify-center">
+            <button
+              onClick={handleLoginWithGoogle}
+              type="button"
+              className="py-1 ps-2 pe-4 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-600 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+              <img
+                src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                alt="google"
+                className="w-8 h-8 inline-block"
+              />
+              Sign up with Google
+            </button>
+          </div>
+          <div className="inline-flex items-center justify-center w-full">
+            <hr className="w-full h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+            <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
+              or
+            </span>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              label="Your Name"
+              id="name"
+              placeholder="Enter your name"
+              regOptions={{required: "Name is required"}}
             />
-            Sign up with Google
-          </button>
-        </div>
-        <div className="inline-flex items-center justify-center w-full">
-          <hr className="w-full h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
-          <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
-            or
-          </span>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label="Your Name"
-            id="name"
-            placeholder="Enter your name"
-            regOptions={{required: "Name is required"}}
-          />
-          <Input
-            label="Your email"
-            type="email"
-            id="email"
-            placeholder="Enter your email"
-            regOptions={{
-              required: "Email is required",
-              pattern: {
-                value:
-                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: "Invalid email address",
-              },
-            }}
-          />
-          <Input
-            label="Your password"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            regOptions={{
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters long",
-              },
-              pattern: {
-                value:
-                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-                message:
-                  "Password must contain at least one letter and one number",
-              },
-            }}
-          />
-          <Input
-            label="Your photo URL"
-            type="url"
-            id="photo_url"
-            placeholder="Enter your photo URL"
-            regOptions={{
-              required: "Photo URL is required",
-              pattern: {
-                value: /^(ftp|http|https):\/\/[^ "]+$/,
-                message: "Invalid photo URL format",
-              },
-            }}
-          />
-          {/* Error message for firebase */}
-          <ShowError msg="firebase-create-account" />
-          <ShowError msg="firebase-profile" />
+            <Input
+              label="Your email"
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              regOptions={{
+                required: "Email is required",
+                pattern: {
+                  value:
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  message: "Invalid email address",
+                },
+              }}
+            />
+            <Input
+              label="Your password"
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              regOptions={{
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters long",
+                },
+                pattern: {
+                  value:
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+                  message:
+                    "Password must contain at least one letter and one number",
+                },
+              }}
+            />
+            <Input
+              label="Your photo URL"
+              type="url"
+              id="photo_url"
+              placeholder="Enter your photo URL"
+              regOptions={{
+                required: "Photo URL is required",
+                pattern: {
+                  value: /^(ftp|http|https):\/\/[^ "]+$/,
+                  message: "Invalid photo URL format",
+                },
+              }}
+            />
+            {/* Error message for firebase */}
+            <ShowError msg="firebase-create-account" />
+            <ShowError msg="firebase-profile" />
 
-          <button type="submit" className="btn btn-blue-600 w-full mb-4">
-            Create an account
-          </button>
-          <p>
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="text-blue-600 font-bold hover:underline">
-              Login here
-            </Link>
-          </p>
-        </form>
-      </div>
-    </section>
+            <button type="submit" className="btn btn-blue-600 w-full mb-4">
+              Create an account
+            </button>
+            <p>
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-blue-600 font-bold hover:underline">
+                Login here
+              </Link>
+            </p>
+          </form>
+        </div>
+      </section>
+      <Footer />
+    </>
   );
 };
 
