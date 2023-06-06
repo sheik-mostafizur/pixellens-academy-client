@@ -7,7 +7,7 @@ const Home = () => {
       <header>
         <Navbar />
         <Container>
-          <h1 className="font-bold text-5xl text-center mt-24">Home</h1>
+          <h1 className="mt-24 text-center text-5xl font-bold">Home</h1>
         </Container>
       </header>
     </div>
