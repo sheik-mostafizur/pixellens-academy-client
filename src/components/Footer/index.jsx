@@ -12,7 +12,7 @@ const Footer = () => {
             <p className="font-bold">
               PixelLens Academy - Unleashing Creativity Since 2023
             </p>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="mt-4 flex flex-wrap items-center gap-4">
               <img
                 className="w-14"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png"
@@ -41,9 +41,9 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} PixelLens Academy. <br /> All
               rights reserved.
             </p>
-            <p>123 Street, City, State, ZIP</p>
-            <p>Email: info@pixellensacademy.com</p>
-            <p>Phone: 123-456-7890</p>
+            <a className="link-hover link">123 Street, City, State, ZIP</a>
+            <a className="link-hover link">Email: info@pixellensacademy.com</a>
+            <a className="link-hover link">Phone: 123-456-7890</a>
           </div>
           <div className="md:w-32">
             <span className="footer-title">Company</span>
@@ -65,7 +65,7 @@ const Footer = () => {
                     <img
                       src={image}
                       alt={`Image ${index + 1}`}
-                      className="h-auto max-w-[155px]"
+                      className="h-auto w-full max-w-[155px]"
                     />
                   </div>
                 ))}

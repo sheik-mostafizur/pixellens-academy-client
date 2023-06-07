@@ -2,6 +2,7 @@ import Container from "../../components/Container";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Banner from "./Banner";
+import PopularClasses from "./PopularClasses";
 
 const Home = () => {
   return (
@@ -12,9 +13,10 @@ const Home = () => {
           <Banner />
         </Container>
       </header>
-      <h1 className="my-24 text-center text-5xl font-bold">Home</h1>
 
-      <Footer/>
+      <PopularClasses />
+
+      <Footer />
     </>
   );
 };
