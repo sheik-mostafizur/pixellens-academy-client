@@ -5,6 +5,7 @@ import {useForm} from "react-hook-form";
 import {uesAuthContext} from "../../context/AuthContext";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import {useCallback} from "react";
 
 const Register = () => {
   const {createUser, logInUserWithGoogle} = uesAuthContext();
@@ -14,8 +15,10 @@ const Register = () => {
     formState: {errors},
     setError,
     reset,
+    watch,
   } = useForm();
   const navigate = useNavigate();
+  const password = watch("password");
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -60,30 +63,33 @@ const Register = () => {
       .catch((error) => setError("logInUser", error.message));
   };
 
-  // show error message component
-  const ShowError = ({msg}) => (
-    <>{errors && <p className="mb-4 text-red-600">{errors[msg]?.message}</p>}</>
+  /**
+   * Why need useCallback?
+   * because I need Input component but when I create another file for Input
+   * There are some problem for {error} references.
+   */
+  const Input = useCallback(
+    ({label, id, type = "text", placeholder, regOptions = {}}) => {
+      return (
+        <div className="mb-6">
+          <label
+            htmlFor={id}
+            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+            {label}
+          </label>
+          <input
+            type={type}
+            {...register(id, regOptions)}
+            id={id}
+            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-600 dark:focus:ring-blue-600"
+            placeholder={placeholder}
+          />
+          {errors && <p className="mb-4 text-red-600">{errors[id]?.message}</p>}
+        </div>
+      );
+    },
+    [errors, register]
   );
-
-  const Input = ({label, id, type = "text", placeholder, regOptions = {}}) => {
-    return (
-      <div className="mb-6">
-        <label
-          htmlFor={id}
-          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-          {label}
-        </label>
-        <input
-          type={type}
-          {...register(id, regOptions)}
-          id={id}
-          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-600 dark:focus:ring-blue-600"
-          placeholder={placeholder}
-        />
-        <ShowError msg={id} />
-      </div>
-    );
-  };
 
   return (
     <>
@@ -153,6 +159,17 @@ const Register = () => {
               }}
             />
             <Input
+              label="Your Confirm password"
+              id="confirmPassword"
+              type="password"
+              placeholder="Enter your Confirm password"
+              regOptions={{
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              }}
+            />
+            <Input
               label="Your photo URL"
               type="url"
               id="photo_url"
@@ -166,8 +183,16 @@ const Register = () => {
               }}
             />
             {/* Error message for firebase */}
-            <ShowError msg="firebase-create-account" />
-            <ShowError msg="firebase-profile" />
+            {errors && (
+              <p className="mb-4 text-red-600">
+                {errors["firebase-create-account"]?.message}
+              </p>
+            )}
+            {errors && (
+              <p className="mb-4 text-red-600">
+                {errors["firebase-profile"]?.message}
+              </p>
+            )}
 
             <button type="submit" className="btn-blue-600 btn mb-4 w-full">
               Create an account
@@ -176,7 +201,9 @@ const Register = () => {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-bold text-primary-600 hover:underline"></Link>
+                className="font-bold text-primary-600 hover:underline">
+                Login
+              </Link>
             </p>
           </form>
         </div>

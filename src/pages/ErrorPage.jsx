@@ -6,7 +6,7 @@ const ErrorPage = () => {
       <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
         <div className="mx-auto max-w-screen-sm text-center">
           <img src={error404} alt="" />
-          <p className="mb-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl">
+          <p className="my-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl">
             Something{`'`}s missing.
           </p>
           <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
