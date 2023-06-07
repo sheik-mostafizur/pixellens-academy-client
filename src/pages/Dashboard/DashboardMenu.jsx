@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {AiFillHome} from "react-icons/ai";
 import {HiUsers} from "react-icons/hi";
+import {MdSpaceDashboard} from "react-icons/md";
 import {Link} from "react-router-dom";
 
 const DashboardMenu = () => {
@@ -45,6 +46,14 @@ const DashboardMenu = () => {
                 className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 <AiFillHome className="text-2xl text-primary-900" />
                 <span className="ml-3">Home</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard"
+                className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                <MdSpaceDashboard className="text-2xl text-primary-900" />
+                <span className="ml-3">Dashboard</span>
               </Link>
             </li>
             <li>
