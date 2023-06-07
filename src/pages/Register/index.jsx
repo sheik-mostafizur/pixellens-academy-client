@@ -154,7 +154,7 @@ const Register = () => {
                   value:
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
                   message:
-                    "Password must contain at least one letter and one number",
+                    "Password must contain at least one letter and one number and special characters",
                 },
               }}
             />
