@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
+import Users from "../pages/Dashboard/Admin/Users";
 
 const Routes = createBrowserRouter([
   {
@@ -22,6 +23,12 @@ const Routes = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    children: [
+      {
+        path: "users",
+        element: <Users />,
+      },
+    ],
   },
 ]);
 export default Routes;
