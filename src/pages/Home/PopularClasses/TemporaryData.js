@@ -7,6 +7,7 @@ const popularClasses = [
     instructorName: "Emily Johnson",
     instructorEmail: "emilyjohnson@example.com",
     availableSeats: 5,
+    enrolled: 5,
     price: 149.99,
   },
   {
@@ -17,6 +18,7 @@ const popularClasses = [
     instructorName: "Michael Smith",
     instructorEmail: "michaelsmith@example.com",
     availableSeats: 8,
+    enrolled: 5,
     price: 179.99,
   },
   {
@@ -27,6 +29,7 @@ const popularClasses = [
     instructorName: "Sarah Thompson",
     instructorEmail: "sarahthompson@example.com",
     availableSeats: 12,
+    enrolled: 4,
     price: 199.99,
   },
   {
@@ -37,6 +40,7 @@ const popularClasses = [
     instructorName: "Daniel Lee",
     instructorEmail: "daniellee@example.com",
     availableSeats: 7,
+    enrolled: 2,
     price: 159.99,
   },
   {
@@ -47,6 +51,7 @@ const popularClasses = [
     instructorName: "Jessica Martinez",
     instructorEmail: "jessicamartinez@example.com",
     availableSeats: 6,
+    enrolled: 6,
     price: 189.99,
   },
   {
@@ -57,7 +62,30 @@ const popularClasses = [
     instructorName: "Robert Brown",
     instructorEmail: "robertbrown@example.com",
     availableSeats: 9,
+    enrolled: 1,
     price: 169.99,
+  },
+  {
+    id: 7,
+    className: "Wildlife Photography Expedition",
+    classImage:
+      "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
+    instructorName: "Olivia Turner",
+    instructorEmail: "oliviaturner@example.com",
+    availableSeats: 10,
+    enrolled: 0,
+    price: 209.99,
+  },
+  {
+    id: 8,
+    className: "Fashion Photography Intensive",
+    classImage:
+      "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
+    instructorName: "Matthew Wilson",
+    instructorEmail: "matthewwilson@example.com",
+    availableSeats: 4,
+    enrolled: 1,
+    price: 219.99,
   },
 ];
 export default popularClasses;

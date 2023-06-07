@@ -5,6 +5,7 @@ const ClassCard = ({popularCls}) => {
     instructorName,
     instructorEmail,
     availableSeats,
+    enrolled,
     price,
   } = popularCls;
   return (
@@ -16,6 +17,7 @@ const ClassCard = ({popularCls}) => {
           Instructor: {instructorName}
         </p>
         <p className="mb-2 text-base text-gray-700">Email: {instructorEmail}</p>
+        <p className="mb-2 text-base text-gray-700">Enrolled: {enrolled}</p>
         <p className="mb-2 text-base text-gray-700">
           Available Seats: {availableSeats}
         </p>

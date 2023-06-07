@@ -1,4 +1,6 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 import {updateProfile} from "@firebase/auth";
 import {auth} from "../../config/firebase";
 import {useForm} from "react-hook-form";
@@ -35,8 +37,26 @@ const Register = () => {
         })
           .then(() => {
             // Profile updated!
-            navigate(from, {replace: true});
-            reset();
+
+            const savedUserDB = {name: name, email: email, photoURL: photo_url};
+            axios
+              .post("http://localhost:3001/users", savedUserDB)
+              .then((response) => {
+                if (response.data.insertedId) {
+                  navigate(from, {replace: true});
+                  reset();
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Account created successfully.",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           })
           .catch((error) => {
             return setError("firebase-profile", {
