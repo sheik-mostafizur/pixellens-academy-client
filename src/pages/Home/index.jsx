@@ -1,5 +1,6 @@
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
+import Banner from "./Banner";
 
 const Home = () => {
   return (
@@ -7,9 +8,10 @@ const Home = () => {
       <header>
         <Navbar />
         <Container>
-          <h1 className="mt-24 text-center text-5xl font-bold">Home</h1>
+          <Banner />
         </Container>
       </header>
+      <h1 className="mt-24 text-center text-5xl font-bold">Home</h1>
     </div>
   );
 };

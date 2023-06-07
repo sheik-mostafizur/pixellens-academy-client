@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <nav className="left-0 top-0 z-20 w-full shadow dark:border-primary-600 dark:bg-gray-900">
-      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4 py-1">
         <Link to="/" className="flex items-center">
           <img
             src={LogoLightMode}
@@ -73,11 +73,11 @@ const Navbar = () => {
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/dashboard"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">
                     Dashboard
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <button
@@ -130,11 +130,20 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/about"
+                to="/instructors"
                 className={({isActive}) =>
                   isActive ? navItemActiveStyle : navItemStyle
                 }>
-                About
+                Instructors
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/classes"
+                className={({isActive}) =>
+                  isActive ? navItemActiveStyle : navItemStyle
+                }>
+                Classes
               </NavLink>
             </li>
             <li>

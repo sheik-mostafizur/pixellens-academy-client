@@ -169,7 +169,7 @@ const Register = () => {
             <ShowError msg="firebase-create-account" />
             <ShowError msg="firebase-profile" />
 
-            <button type="submit" className="btn btn-blue-600 mb-4 w-full">
+            <button type="submit" className="btn-blue-600 btn mb-4 w-full">
               Create an account
             </button>
             <p>

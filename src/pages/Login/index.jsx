@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 
 import {uesAuthContext} from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
@@ -8,6 +9,7 @@ const Login = () => {
   const {logInUser, logInUserWithGoogle} = uesAuthContext();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [isShowPass, setIsShowPass] = useState(false);
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -38,7 +40,9 @@ const Login = () => {
       })
       .catch((error) => setError(error.message));
   };
-
+  const handleIsShowPassword = () => {
+    setIsShowPass(!isShowPass);
+  };
   return (
     <>
       <header>
@@ -83,19 +87,30 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="mb-6">
+            <div className="relative mb-6">
               <label
                 htmlFor="password"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Your password
               </label>
               <input
-                type="password"
+                type={isShowPass ? "text" : "password"}
                 name="password"
                 className="focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                 placeholder="********"
                 required
               />
+              {isShowPass ? (
+                <AiFillEye
+                  onClick={handleIsShowPassword}
+                  className="absolute right-2 top-1/2 cursor-pointer text-2xl text-primary-900"
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  onClick={handleIsShowPassword}
+                  className="absolute right-2 top-1/2 cursor-pointer text-2xl text-primary-900"
+                />
+              )}
             </div>
             {error && <p className="mb-4 text-red-600">{error}</p>}
             <button type="submit" className="btn mb-4 w-full">
