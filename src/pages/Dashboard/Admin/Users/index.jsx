@@ -7,32 +7,34 @@ const Users = () => {
   useEffect(() => {
     axios.get("http://localhost:3001/users").then(({data}) => setUsers(data));
   }, []);
+  const handleMakeAdmin = (_id, name) => {
+    axios.patch(`http://localhost:3001/users/admin/${_id}`).then(({data}) => {
+      if (data.modifiedCount) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${name} is an Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
-  const handleMakeAdmin = (_id) => {
-    // axios.patch(`http://localhost:3001/users/admin/${_id}`).then(({data}) => {
-    //   console.log(data);
-    // });
-
-    fetch(`http://localhost:3001/users/admin/${_id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+  const handleMakeInstructor = (_id, name) => {
+    axios
+      .patch(`http://localhost:3001/users/instructor/${_id}`)
+      .then(({data}) => {
         if (data.modifiedCount) {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: `is an Admin Now!`,
+            title: `${name} is an Instructor Now!`,
             showConfirmButton: false,
             timer: 1500,
           });
         }
       });
-  };
-
-  const handleMakeInstructor = (_id) => {
-    console.log(_id);
   };
   return (
     <div>
@@ -65,13 +67,13 @@ const Users = () => {
                   <td className="px-6 py-4">{user.email}</td>
                   <td className="bg-gray-50 px-6 py-4 dark:bg-gray-800">
                     <button
-                      onClick={() => handleMakeInstructor(user._id)}
+                      onClick={() => handleMakeInstructor(user._id, user.name)}
                       className="btn-sm btn py-1 "
                       disabled={user?.userType === "instructor"}>
                       Instructor
                     </button>
                     <button
-                      onClick={() => handleMakeAdmin(user._id)}
+                      onClick={() => handleMakeAdmin(user._id, user.name)}
                       className="btn-sm btn py-1"
                       disabled={user?.userType === "admin"}>
                       Admin
