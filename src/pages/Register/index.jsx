@@ -45,7 +45,7 @@ const Register = () => {
               userType: "student",
             };
             axios
-              .post("http://localhost:3001/users", savedUserDB)
+              .post("/users", savedUserDB)
               .then((response) => {
                 if (response.data.insertedId) {
                   navigate(from, {replace: true});

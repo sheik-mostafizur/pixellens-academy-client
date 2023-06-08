@@ -11,14 +11,14 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:3001/users").then(({data}) => {
+    axios.get("/users").then(({data}) => {
       setUsers(data);
       setLoading(false);
     });
   }, []);
 
   const handleMakeAdmin = (_id, name) => {
-    axios.patch(`http://localhost:3001/users/admin/${_id}`).then(({data}) => {
+    axios.patch(`/users/admin/${_id}`).then(({data}) => {
       if (data.modifiedCount) {
         Swal.fire({
           position: "top-end",
@@ -33,7 +33,7 @@ const Users = () => {
 
   const handleMakeInstructor = (_id, name) => {
     axios
-      .patch(`http://localhost:3001/users/instructor/${_id}`)
+      .patch(`/users/instructor/${_id}`)
       .then(({data}) => {
         if (data.modifiedCount) {
           Swal.fire({

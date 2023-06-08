@@ -13,7 +13,7 @@ const Instructors = () => {
   const [instructorsData, setInstructorsData] = useState([]);
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:3001/users/instructors").then(({data}) => {
+    axios.get("/users/instructors").then(({data}) => {
       setInstructorsData(data);
       setLoading(false);
     });
