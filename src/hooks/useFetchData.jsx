@@ -1,20 +1,21 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import axiosURL from "../axios/axiosURL";
 
 const useFetchData = (url, stateValue = []) => {
-  const [loadedData, setLoadedData] = useState(stateValue);
+  const [data, setData] = useState(stateValue);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchData = useCallback(async () => {
     try {
       const response = await axiosURL.get(url);
-      setLoadedData(response.data);
+      setData(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
     }
-  };
+  });
 
   useEffect(() => {
     fetchData();
@@ -25,7 +26,7 @@ const useFetchData = (url, stateValue = []) => {
     fetchData();
   };
 
-  return {loadedData, loading, refetch};
+  return {data, loading, refetch};
 };
 
 export default useFetchData;

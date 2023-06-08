@@ -5,8 +5,8 @@ import ShowInstructorData from "./ShowInstructorData";
 
 const Instructor = () => {
   const {user: firebaseUser} = uesAuthContext();
-  const {loadedData: users} = useFetchData(`/users/`);
-  const {loadedData: instructorClasses, loading, refetch} = useFetchData(
+  const {data: users} = useFetchData(`/users/`);
+  const {data: instructorClasses, loading, refetch} = useFetchData(
     `admin/${firebaseUser?.email}/classes`
   );
   const newClassData = instructorClasses.reduce((acc, cls) => {

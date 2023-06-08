@@ -1,25 +1,17 @@
-import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
 import {GiTeacher} from "react-icons/gi";
 import {RiAdminFill} from "react-icons/ri";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import axiosURL from "../../../../axios/axiosURL";
+import useFetchData from "../../../../hooks/useFetchData";
 
 const Users = () => {
-  const [loading, setLoading] = useState(false);
-
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    setLoading(true);
-    axiosURL.get("/users").then(({data}) => {
-      setUsers(data);
-      setLoading(false);
-    });
-  }, []);
+  const {data: users, loading, refetch} = useFetchData("/users");
 
   const handleMakeAdmin = (_id, name) => {
     axiosURL.patch(`/admin/${_id}`).then(({data}) => {
       if (data.modifiedCount) {
+        refetch();
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -34,6 +26,7 @@ const Users = () => {
   const handleMakeInstructor = (_id, name) => {
     axiosURL.patch(`/instructor/${_id}`).then(({data}) => {
       if (data.modifiedCount) {
+        refetch();
         Swal.fire({
           position: "top-end",
           icon: "success",
