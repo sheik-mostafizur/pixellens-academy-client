@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import {motion} from "framer-motion";
 import {uesAuthContext} from "../../../../context/AuthContext";
 import axiosURL from "../../../../axios/axiosURL";
 const ShowInstructorData = ({instructorClasses, refetch}) => {
@@ -30,7 +31,6 @@ const ShowInstructorData = ({instructorClasses, refetch}) => {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        refetch();
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -38,6 +38,7 @@ const ShowInstructorData = ({instructorClasses, refetch}) => {
           showConfirmButton: false,
           timer: 1500,
         });
+        return refetch();
       }
     });
   };
@@ -53,7 +54,12 @@ const ShowInstructorData = ({instructorClasses, refetch}) => {
             : "bg-green-100";
 
         return (
-          <div key={instCls._id} className={`shadow ${cardBgColor}`}>
+          <motion.div
+            initial={{opacity: 0, scale: 0.5}}
+            animate={{opacity: 1, scale: 1}}
+            transition={{duration: 0.5}}
+            key={instCls._id}
+            className={`shadow ${cardBgColor}`}>
             <img src={instCls.imageURL} alt="" />
             <div className="p-4">
               <h3>
@@ -116,7 +122,7 @@ const ShowInstructorData = ({instructorClasses, refetch}) => {
                 </h4>
               )}
             </div>
-          </div>
+          </motion.div>
         );
       })}
     </div>

@@ -3,21 +3,13 @@ import Navbar from "../../components/Navbar";
 import Container from "../../components/Container";
 import Footer from "../../components/Footer";
 import InstructorCard from "./InstructorCard";
-import {useEffect, useState} from "react";
 import LoaderSpinner from "../../components/LoaderSpinner";
-import axiosURL from "../../axios/axiosURL";
+import useFetchData from "../../hooks/useFetchData";
 
 const Instructors = () => {
-  const [loading, setLoading] = useState(false);
+  const {data: instructorsData, loading} = useFetchData("/Instructors")
 
-  const [instructorsData, setInstructorsData] = useState([]);
-  useEffect(() => {
-    setLoading(true);
-    axiosURL.get("/instructors").then(({data}) => {
-      setInstructorsData(data);
-      setLoading(false);
-    });
-  }, []);
+
 
   return (
     <div>
