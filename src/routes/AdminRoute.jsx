@@ -1,18 +1,18 @@
 import {Navigate, useLocation} from "react-router";
-import useAdmin from "../hooks/useAdmin";
 import {uesAuthContext} from "../context/AuthContext";
 import LoaderSpinner from "../components/LoaderSpinner";
+import useUserType from "../hooks/useUserType";
 
 const AdminRoute = ({children}) => {
   const {user, loading} = uesAuthContext();
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const [userType, isUserTypeLoading] = useUserType();
   const location = useLocation();
 
-  if (loading || isAdminLoading) {
+  if (loading || isUserTypeLoading) {
     return <LoaderSpinner />;
   }
 
-  if (user && isAdmin) {
+  if (user && userType === "admin") {
     return children;
   }
   return <Navigate to="/" state={{from: location}} replace></Navigate>;
