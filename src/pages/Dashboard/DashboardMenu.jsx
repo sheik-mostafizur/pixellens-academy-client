@@ -1,18 +1,16 @@
 import {useState} from "react";
 import {AiFillHome} from "react-icons/ai";
-import {HiUsers} from "react-icons/hi";
 import {MdSpaceDashboard} from "react-icons/md";
-import {SiGoogleclassroom} from "react-icons/si";
 import {Link} from "react-router-dom";
 import useUserType from "../../hooks/useUserType";
 import AdminMenu from "./Admin/AdminMenu";
+import InstructorMenu from "./Instructor/InstructorMenu";
 
 const DashboardMenu = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const handleToggleMenu = () => setToggleMenu(!toggleMenu);
   const [userType] = useUserType();
 
-  const instructorMenu = <></>;
   return (
     <>
       <button
@@ -62,7 +60,7 @@ const DashboardMenu = () => {
               </Link>
             </li>
             {/* Instructor menu  */}
-            {userType === "instructor" && instructorMenu}
+            {userType === "instructor" && <InstructorMenu />}
 
             {/* admin menu */}
             {userType === "admin" && <AdminMenu />}

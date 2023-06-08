@@ -7,6 +7,8 @@ import Dashboard from "../pages/Dashboard";
 import Users from "../pages/Dashboard/Admin/Users";
 import AdminRoute from "./AdminRoute";
 import UserDashboard from "../pages/Dashboard/UserDashboard";
+import AddClass from "../pages/Dashboard/Instructor/AddClass";
+import InstructorRoute from "./InstructorRoute";
 
 const Routes = createBrowserRouter([
   {
@@ -26,7 +28,17 @@ const Routes = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     children: [
-      {path: "/dashboard", element: <UserDashboard/>},
+      {path: "/dashboard", element: <UserDashboard />},
+      // Instructor Routes
+      {
+        path: "add-class",
+        element: (
+          <InstructorRoute>
+            <AddClass />
+          </InstructorRoute>
+        ),
+      },
+      // Admin Routes
       {
         path: "users",
         element: (
