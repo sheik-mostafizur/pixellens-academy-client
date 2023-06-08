@@ -3,11 +3,28 @@ import {AiFillHome} from "react-icons/ai";
 import {HiUsers} from "react-icons/hi";
 import {MdSpaceDashboard} from "react-icons/md";
 import {Link} from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 const DashboardMenu = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const handleToggleMenu = () => setToggleMenu(!toggleMenu);
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
+  const adminMenu = (
+    <>
+      <li>
+        <Link
+          to="users"
+          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+          <HiUsers className="text-2xl text-primary-900" />
+          <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
+        </Link>
+      </li>
+    </>
+  );
+  const instructorMenu = <></>;
   return (
     <>
       <button
@@ -56,14 +73,11 @@ const DashboardMenu = () => {
                 <span className="ml-3">Dashboard</span>
               </Link>
             </li>
-            <li>
-              <Link
-                to="users"
-                className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                <HiUsers className="text-2xl text-primary-900" />
-                <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
-              </Link>
-            </li>
+            {/* Instructor menu  */}
+            {isInstructor && instructorMenu}
+
+            {/* admin menu */}
+            {isAdmin && adminMenu}
           </ul>
         </div>
       </aside>
