@@ -1,32 +1,37 @@
 import {useState} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
+import Swal from "sweetalert2";
 
 import {uesAuthContext} from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import {useForm} from "react-hook-form";
 const Login = () => {
   const {logInUser, logInUserWithGoogle} = uesAuthContext();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(false);
+  const {register, handleSubmit, reset} = useForm();
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-
+  const onSubmit = ({email, password}) => {
     setError("");
     // login using email and password
     logInUser(email, password)
       .then(() => {
         setError("");
-        form.reset();
+        reset();
         navigate(from, {replace: true});
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logged In successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => setError(error.message));
   };
@@ -72,7 +77,7 @@ const Login = () => {
               or
             </span>
           </div>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
               <label
                 htmlFor="email"
@@ -81,7 +86,7 @@ const Login = () => {
               </label>
               <input
                 type="email"
-                name="email"
+                {...register("email")}
                 className="focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                 placeholder="Enter your email"
                 required
@@ -95,7 +100,7 @@ const Login = () => {
               </label>
               <input
                 type={isShowPass ? "text" : "password"}
-                name="password"
+                {...register("password")}
                 className="focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                 placeholder="********"
                 required

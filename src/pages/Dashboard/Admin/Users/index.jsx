@@ -78,8 +78,17 @@ const Users = () => {
                     className="border-b border-gray-200 dark:border-gray-700">
                     <th
                       scope="row"
-                      className="whitespace-nowrap bg-gray-50 px-6 py-4 font-medium text-gray-900 dark:bg-gray-800 dark:text-white">
-                      {user.name}
+                      className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={user?.photoURL}
+                        alt={user?.name}
+                      />
+                      <div className="pl-3">
+                        <div className="text-base font-semibold">
+                          {user?.name}
+                        </div>
+                      </div>
                     </th>
                     <td className="px-6 py-4">{user.email}</td>
                     <td className="bg-gray-50 px-6 py-4 dark:bg-gray-800">

@@ -5,10 +5,26 @@ const UserDashboard = () => {
   const {user} = uesAuthContext();
   const [userType] = useUserType();
   return (
-    <div>
-      <h1>UserDashboard</h1>
-      <h2>Name: {user?.displayName}</h2>
-      {userType && <h3>User Type: {userType}</h3>}
+    <div className="space-y-8 text-3xl md:text-5xl">
+      <h1 className="font-bold">Your Dashboard</h1>
+
+      {user && (
+        <div className="mx-auto max-w-3xl space-y-8 p-8 shadow">
+          <img src={user?.photoURL} alt="" />
+          <h2>
+            <b>Name: </b>
+            {user?.displayName}
+          </h2>
+          <h2>
+            <b>Email: </b>
+            {user?.email}
+          </h2>
+          <h2>
+            <b>User: </b>
+            {userType}
+          </h2>
+        </div>
+      )}
     </div>
   );
 };
