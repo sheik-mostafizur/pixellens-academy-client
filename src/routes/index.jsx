@@ -1,13 +1,66 @@
 import {createBrowserRouter} from "react-router-dom";
-import RoutesForPublic from "./RoutesForPublic";
-import RoutesForAdmin from "./RoutesForAdmin";
-import RoutesForInstructor from "./RoutesForInstructor";
-import RoutesForStudent from "./RoutesForStudent";
+import Home from "../pages/Home";
+import ErrorPage from "../pages/ErrorPage";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
+
+import Dashboard from "../pages/Dashboard";
+import UserDashboard from "../pages/Dashboard/UserDashboard";
+import PrivateForInstructorRoutes from "./PrivateForInstructorRoutes";
+import AddClass from "../pages/Dashboard/Instructor/AddClass";
+import Users from "../pages/Dashboard/Admin/Users";
+import PrivateForAdminRoutes from "./PrivateForAdminRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 const Routes = createBrowserRouter([
-  ...RoutesForPublic,
-  ...RoutesForStudent,
-  ...RoutesForInstructor,
-  ...RoutesForAdmin,
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoutes>
+        <Dashboard />
+      </PrivateRoutes>
+    ),
+    children: [
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoutes>
+            <UserDashboard />
+          </PrivateRoutes>
+        ),
+      },
+      // Instructor
+      {
+        path: "add-class",
+        element: (
+          <PrivateForInstructorRoutes>
+            <AddClass />
+          </PrivateForInstructorRoutes>
+        ),
+      },
+      // admin
+      {
+        path: "users",
+        element: (
+          <PrivateForAdminRoutes>
+            <Users />
+          </PrivateForAdminRoutes>
+        ),
+      },
+    ],
+  },
 ]);
 export default Routes;

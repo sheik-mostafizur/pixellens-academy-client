@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import useUserType from "../../hooks/useUserType";
 import AdminMenu from "./Admin/AdminMenu";
 import InstructorMenu from "./Instructor/InstructorMenu";
+import StudentMenu from "./Student/StudentMenu";
 
 const DashboardMenu = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -59,6 +60,9 @@ const DashboardMenu = () => {
                 <span className="ml-3">Dashboard</span>
               </Link>
             </li>
+            {/* Student menu  */}
+            {userType === "student" && <StudentMenu />}
+
             {/* Instructor menu  */}
             {userType === "instructor" && <InstructorMenu />}
 
