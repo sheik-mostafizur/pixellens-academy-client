@@ -1,18 +1,18 @@
 import {Navigate, useLocation} from "react-router";
 import {uesAuthContext} from "../context/AuthContext";
 import LoaderSpinner from "../components/LoaderSpinner";
-import useInstructor from "../hooks/useInstructor";
+import useUserType from "../hooks/useUserType";
 
 const InstructorRoute = ({children}) => {
   const {user, loading} = uesAuthContext();
-  const [isInstructor, isInstructorLoading] = useInstructor();
+  const [userType, isUserTypeLoading] = useUserType();
   const location = useLocation();
 
-  if (loading || isInstructorLoading) {
+  if (loading || isUserTypeLoading) {
     return <LoaderSpinner />;
   }
 
-  if (user && isInstructor) {
+  if (user && userType === "instructor") {
     return children;
   }
   return <Navigate to="/" state={{from: location}} replace></Navigate>;

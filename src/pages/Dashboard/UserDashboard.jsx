@@ -1,14 +1,14 @@
 import {uesAuthContext} from "../../context/AuthContext";
-import useAdmin from "../../hooks/useAdmin";
+import useUserType from "../../hooks/useUserType";
 
 const UserDashboard = () => {
   const {user} = uesAuthContext();
-  const [isAdmin] = useAdmin();
+  const [userType] = useUserType();
   return (
     <div>
       <h1>UserDashboard</h1>
       <h2>Name: {user?.displayName}</h2>
-      {isAdmin ? <h3>User Type: Admin</h3> : <h3>User</h3>}
+      {userType && <h3>User Type: {userType}</h3>}
     </div>
   );
 };

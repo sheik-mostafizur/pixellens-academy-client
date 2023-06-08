@@ -4,35 +4,14 @@ import {HiUsers} from "react-icons/hi";
 import {MdSpaceDashboard} from "react-icons/md";
 import {SiGoogleclassroom} from "react-icons/si";
 import {Link} from "react-router-dom";
-import useAdmin from "../../hooks/useAdmin";
-import useInstructor from "../../hooks/useInstructor";
+import useUserType from "../../hooks/useUserType";
+import AdminMenu from "./Admin/AdminMenu";
 
 const DashboardMenu = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const handleToggleMenu = () => setToggleMenu(!toggleMenu);
-  const [isAdmin] = useAdmin();
-  const [isInstructor] = useInstructor();
+  const [userType] = useUserType();
 
-  const adminMenu = (
-    <>
-      <li>
-        <Link
-          to="users"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-          <HiUsers className="text-2xl text-primary-900" />
-          <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="classes"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-          <SiGoogleclassroom className="text-2xl text-primary-900" />
-          <span className="ml-3 flex-1 whitespace-nowrap">Classes</span>
-        </Link>
-      </li>
-    </>
-  );
   const instructorMenu = <></>;
   return (
     <>
@@ -83,10 +62,10 @@ const DashboardMenu = () => {
               </Link>
             </li>
             {/* Instructor menu  */}
-            {isInstructor && instructorMenu}
+            {userType === "instructor" && instructorMenu}
 
             {/* admin menu */}
-            {isAdmin && adminMenu}
+            {userType === "admin" && <AdminMenu />}
           </ul>
         </div>
       </aside>
