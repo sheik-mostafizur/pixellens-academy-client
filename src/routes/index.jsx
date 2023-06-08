@@ -11,6 +11,7 @@ import AddClass from "../pages/Dashboard/Instructor/AddClass";
 import Users from "../pages/Dashboard/Admin/Users";
 import PrivateForAdminRoutes from "./PrivateForAdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import Instructors from "../pages/Instructors";
 
 const Routes = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const Routes = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/instructors",
+    element: <Instructors />,
   },
   {
     path: "/dashboard",

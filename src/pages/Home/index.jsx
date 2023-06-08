@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>PixelLens Academy | Home</title>
+        <title>Home | PixelLens Academy</title>
       </Helmet>
       <header>
         <Navbar />
