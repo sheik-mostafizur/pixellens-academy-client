@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 
-import axios from "axios";
 import {uesAuthContext} from "../context/AuthContext";
+import axiosURL from "../pages/axios/axiosURL";
 
 const useUserType = () => {
   const {user, loading} = uesAuthContext();
@@ -11,9 +11,7 @@ const useUserType = () => {
     {
       enabled: !loading,
       queryFn: async () => {
-        const response = await axios.get(
-          `http://localhost:3001/users/user-type/${user?.email}`
-        );
+        const response = await axiosURL.get(`/user-type/${user?.email}`);
         return response.data.userType;
       },
     }

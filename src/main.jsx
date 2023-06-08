@@ -6,8 +6,6 @@ import AuthContext from "./context/AuthContext";
 import Routes from "./routes";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {HelmetProvider} from "react-helmet-async";
-import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001/";
 
 const queryClient = new QueryClient();
 

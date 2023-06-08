@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {useForm} from "react-hook-form";
 import {uesAuthContext} from "../../../../context/AuthContext";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import Swal from "sweetalert2";
+import axiosURL from "../../../axios/axiosURL";
 
 const imgHostingToken = import.meta.env.VITE_Image_Upload_token;
 
@@ -21,7 +21,7 @@ const AddClass = () => {
   const imgHostingURL = `https://api.imgbb.com/1/upload?key=${imgHostingToken}`;
 
   useEffect(() => {
-    axios.get(`/users/${user?.email}`).then((response) => {
+    axiosURL.get(`/users/${user?.email}`).then((response) => {
       setUserFromDB(response.data);
       setLoading(false);
     });
@@ -30,6 +30,7 @@ const AddClass = () => {
   const onSubmit = (data) => {
     data.instructorId = userFromDB?._id;
     data.enrolled = 0;
+    data.status = "pending";
     data.price = parseFloat(data.price);
     data.availableSeats = parseInt(data.availableSeats);
 
@@ -44,7 +45,7 @@ const AddClass = () => {
       .then((imgResponse) => {
         if (imgResponse.success) {
           data.imageURL = imgResponse.data.display_url;
-          axios.post(`/classes`, data).then(() => {
+          axiosURL.post(`/classes`, data).then(() => {
             reset();
             Swal.fire({
               position: "center",

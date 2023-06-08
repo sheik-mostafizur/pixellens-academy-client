@@ -1,5 +1,4 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
 import Swal from "sweetalert2";
 import {updateProfile} from "@firebase/auth";
 import {auth} from "../../config/firebase";
@@ -8,6 +7,7 @@ import {uesAuthContext} from "../../context/AuthContext";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import {useCallback} from "react";
+import axiosURL from "../axios/axiosURL";
 
 const Register = () => {
   const {createUser, logInUserWithGoogle} = uesAuthContext();
@@ -44,7 +44,7 @@ const Register = () => {
               photoURL: photo_url,
               userType: "student",
             };
-            axios
+            axiosURL
               .post("/users", savedUserDB)
               .then((response) => {
                 if (response.data.insertedId) {

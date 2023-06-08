@@ -1,9 +1,9 @@
-import axios from "axios";
 import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
 import {GiTeacher} from "react-icons/gi";
 import {RiAdminFill} from "react-icons/ri";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
+import axiosURL from "../../../axios/axiosURL";
 
 const Users = () => {
   const [loading, setLoading] = useState(false);
@@ -11,14 +11,14 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     setLoading(true);
-    axios.get("/users").then(({data}) => {
+    axiosURL.get("/users").then(({data}) => {
       setUsers(data);
       setLoading(false);
     });
   }, []);
 
   const handleMakeAdmin = (_id, name) => {
-    axios.patch(`/users/admin/${_id}`).then(({data}) => {
+    axiosURL.patch(`/admin/${_id}`).then(({data}) => {
       if (data.modifiedCount) {
         Swal.fire({
           position: "top-end",
@@ -32,19 +32,17 @@ const Users = () => {
   };
 
   const handleMakeInstructor = (_id, name) => {
-    axios
-      .patch(`/users/instructor/${_id}`)
-      .then(({data}) => {
-        if (data.modifiedCount) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${name} is an Instructor Now!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+    axiosURL.patch(`/instructor/${_id}`).then(({data}) => {
+      if (data.modifiedCount) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${name} is an Instructor Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
   return (
     <div>
