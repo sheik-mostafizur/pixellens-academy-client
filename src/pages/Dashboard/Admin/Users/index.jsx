@@ -16,7 +16,7 @@ const Users = () => {
       setLoading(false);
     });
   }, []);
-  console.log(loading);
+
   const handleMakeAdmin = (_id, name) => {
     axios.patch(`http://localhost:3001/users/admin/${_id}`).then(({data}) => {
       if (data.modifiedCount) {

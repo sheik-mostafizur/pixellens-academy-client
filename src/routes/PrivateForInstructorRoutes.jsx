@@ -3,7 +3,7 @@ import {uesAuthContext} from "../context/AuthContext";
 import LoaderSpinner from "../components/LoaderSpinner";
 import useUserType from "../hooks/useUserType";
 
-const InstructorRoute = ({children}) => {
+const PrivateForInstructorRoutes = ({children}) => {
   const {user, loading} = uesAuthContext();
   const [userType, isUserTypeLoading] = useUserType();
   const location = useLocation();
@@ -18,4 +18,4 @@ const InstructorRoute = ({children}) => {
   return <Navigate to="/" state={{from: location}} replace></Navigate>;
 };
 
-export default InstructorRoute;
+export default PrivateForInstructorRoutes;

@@ -3,7 +3,7 @@ import {uesAuthContext} from "../context/AuthContext";
 import LoaderSpinner from "../components/LoaderSpinner";
 import useUserType from "../hooks/useUserType";
 
-const AdminRoute = ({children}) => {
+const PrivateForStudentRoutes = ({children}) => {
   const {user, loading} = uesAuthContext();
   const [userType, isUserTypeLoading] = useUserType();
   const location = useLocation();
@@ -12,10 +12,10 @@ const AdminRoute = ({children}) => {
     return <LoaderSpinner />;
   }
 
-  if (user && userType === "admin") {
+  if (user && userType === "student") {
     return children;
   }
   return <Navigate to="/" state={{from: location}} replace></Navigate>;
 };
 
-export default AdminRoute;
+export default PrivateForStudentRoutes;
