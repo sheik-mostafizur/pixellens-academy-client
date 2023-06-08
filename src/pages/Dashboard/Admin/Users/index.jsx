@@ -1,6 +1,8 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
+import {GiTeacher} from "react-icons/gi";
+import {RiAdminFill} from "react-icons/ri";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 
 const Users = () => {
@@ -85,15 +87,15 @@ const Users = () => {
                         onClick={() =>
                           handleMakeInstructor(user._id, user.name)
                         }
-                        className="btn-sm btn py-1 "
+                        className="btn me-1 text-2xl"
                         disabled={user?.userType === "instructor"}>
-                        Instructor
+                        <GiTeacher />
                       </button>
                       <button
                         onClick={() => handleMakeAdmin(user._id, user.name)}
-                        className="btn-sm btn py-1"
+                        className="btn text-2xl"
                         disabled={user?.userType === "admin"}>
-                        Admin
+                        <RiAdminFill />
                       </button>
                     </td>
                   </tr>
