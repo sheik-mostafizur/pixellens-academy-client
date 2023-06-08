@@ -13,6 +13,7 @@ import PrivateForAdminRoutes from "./PrivateForAdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Instructors from "../pages/Instructors";
 import MyClasses from "../pages/Dashboard/Instructor/MyClasses";
+import Instructor from "../pages/Dashboard/Admin/InstructorClasses";
 
 const Routes = createBrowserRouter([
   {
@@ -71,6 +72,14 @@ const Routes = createBrowserRouter([
         element: (
           <PrivateForAdminRoutes>
             <Users />
+          </PrivateForAdminRoutes>
+        ),
+      },
+      {
+        path: "classes",
+        element: (
+          <PrivateForAdminRoutes>
+            <Instructor />
           </PrivateForAdminRoutes>
         ),
       },

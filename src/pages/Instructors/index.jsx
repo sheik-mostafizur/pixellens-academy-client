@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import InstructorCard from "./InstructorCard";
 import {useEffect, useState} from "react";
 import LoaderSpinner from "../../components/LoaderSpinner";
-import axiosURL from "../axios/axiosURL";
+import axiosURL from "../../axios/axiosURL";
 
 const Instructors = () => {
   const [loading, setLoading] = useState(false);

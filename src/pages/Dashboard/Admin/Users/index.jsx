@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import {GiTeacher} from "react-icons/gi";
 import {RiAdminFill} from "react-icons/ri";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
-import axiosURL from "../../../axios/axiosURL";
+import axiosURL from "../../../../axios/axiosURL";
 
 const Users = () => {
   const [loading, setLoading] = useState(false);

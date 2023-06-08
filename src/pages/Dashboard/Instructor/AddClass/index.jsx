@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form";
 import {uesAuthContext} from "../../../../context/AuthContext";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import Swal from "sweetalert2";
-import axiosURL from "../../../axios/axiosURL";
+import axiosURL from "../../../../axios/axiosURL";
 
 const imgHostingToken = import.meta.env.VITE_Image_Upload_token;
 

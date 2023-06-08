@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {uesAuthContext} from "../../../../context/AuthContext";
-import axiosURL from "../../../axios/axiosURL";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import TableMyClasses from "./TableMyClasses";
+import axiosURL from "../../../../axios/axiosURL";
 
 const MyClasses = () => {
   const {user} = uesAuthContext();

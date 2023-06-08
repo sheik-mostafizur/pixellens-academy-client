@@ -7,7 +7,7 @@ import {uesAuthContext} from "../../context/AuthContext";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import {useCallback} from "react";
-import axiosURL from "../axios/axiosURL";
+import axiosURL from "../../axios/axiosURL";
 
 const Register = () => {
   const {createUser, logInUserWithGoogle} = uesAuthContext();

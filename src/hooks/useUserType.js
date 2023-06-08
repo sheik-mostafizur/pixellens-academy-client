@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 
 import {uesAuthContext} from "../context/AuthContext";
-import axiosURL from "../pages/axios/axiosURL";
+import axiosURL from "../axios/axiosURL";
 
 const useUserType = () => {
   const {user, loading} = uesAuthContext();
