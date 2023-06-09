@@ -1,6 +1,6 @@
 const popularClasses = [
   {
-    id: 1,
+    _id: 1,
     className: "Digital Photography 101",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
@@ -11,7 +11,7 @@ const popularClasses = [
     price: 149.99,
   },
   {
-    id: 2,
+    _id: 2,
     className: "Portrait Photography Workshop",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
@@ -22,7 +22,7 @@ const popularClasses = [
     price: 179.99,
   },
   {
-    id: 3,
+    _id: 3,
     className: "Landscape Photography Expedition",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
@@ -33,7 +33,7 @@ const popularClasses = [
     price: 199.99,
   },
   {
-    id: 4,
+    _id: 4,
     className: "Street Photography Masterclass",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
@@ -44,7 +44,7 @@ const popularClasses = [
     price: 159.99,
   },
   {
-    id: 5,
+    _id: 5,
     className: "Studio Lighting Techniques",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
@@ -55,7 +55,7 @@ const popularClasses = [
     price: 189.99,
   },
   {
-    id: 6,
+    _id: 6,
     className: "Food Photography Workshop",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
@@ -66,7 +66,7 @@ const popularClasses = [
     price: 169.99,
   },
   {
-    id: 7,
+    _id: 7,
     className: "Wildlife Photography Expedition",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",
@@ -77,7 +77,7 @@ const popularClasses = [
     price: 209.99,
   },
   {
-    id: 8,
+    _id: 8,
     className: "Fashion Photography Intensive",
     classImage:
       "https://cloudfront.slrlounge.com/wp-content/uploads/2019/05/film-to-digital.jpg",

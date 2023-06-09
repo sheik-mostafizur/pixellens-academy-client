@@ -1,8 +1,25 @@
 import {motion} from "framer-motion";
+import Swal from "sweetalert2";
 import useUserType from "../../hooks/useUserType";
+import {useNavigate} from "react-router-dom";
 const ClassesCard = ({cls}) => {
   const [userType] = useUserType();
-  const {className, imageURL, price, availableSeats, instructorName} = cls;
+  const navigate = useNavigate();
+  const {_id, className, imageURL, price, availableSeats, instructorName} = cls;
+
+  const handleEnroll = () => {
+    if (!userType) {
+      return Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Please Login!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    navigate(`/enroll/${_id}`);
+  };
+
   const variants = {
     initial: {
       opacity: 0,
@@ -52,12 +69,13 @@ const ClassesCard = ({cls}) => {
         </h3>
         <div className="card-actions justify-end">
           <button
+            onClick={handleEnroll}
             disabled={
               userType === "admin" ||
               userType === "instructor" ||
               availableSeats === 0
             }
-            className="btn-primary btn">
+            className="btn">
             Enrol Now
           </button>
         </div>
