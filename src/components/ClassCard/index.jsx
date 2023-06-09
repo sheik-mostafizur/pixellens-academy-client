@@ -1,10 +1,13 @@
 import {motion} from "framer-motion";
 import Swal from "sweetalert2";
 import useUserType from "../../hooks/useUserType";
-import {useNavigate} from "react-router-dom";
-const ClassesCard = ({cls}) => {
+import useFetchUserDB from "../../hooks/useFetchUserDB";
+import axiosURL from "../../axios/axiosURL";
+const ClassCard = ({cls}) => {
   const [userType] = useUserType();
-  const navigate = useNavigate();
+  const [userDB, isUserDBLoading] = useFetchUserDB();
+  const bookingUserId = userDB?._id;
+  const isBooked = userDB?.selectedClasses;
   const {_id, className, imageURL, price, availableSeats, instructorName} = cls;
 
   const handleEnroll = () => {
@@ -17,7 +20,19 @@ const ClassesCard = ({cls}) => {
         timer: 1500,
       });
     }
-    navigate(`/enroll/${_id}`);
+    axiosURL
+      .patch(`/selected-classes/${bookingUserId}`, {selectedClass: _id})
+      .then(({data}) => {
+        if (data.matchedCount) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Booked go to dashboard and pay now!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
 
   const variants = {
@@ -73,10 +88,12 @@ const ClassesCard = ({cls}) => {
             disabled={
               userType === "admin" ||
               userType === "instructor" ||
-              availableSeats === 0
+              availableSeats === 0 ||
+              isUserDBLoading ||
+              (isBooked && isBooked.includes(_id))
             }
             className="btn">
-            Enrol Now
+            {isBooked && isBooked.includes(_id) ? "Booked" : "Book Now"}
           </button>
         </div>
       </div>
@@ -84,4 +101,4 @@ const ClassesCard = ({cls}) => {
   );
 };
 
-export default ClassesCard;
+export default ClassCard;

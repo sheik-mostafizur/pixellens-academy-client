@@ -17,7 +17,6 @@ export const uesAuthContext = () => useContext(UserContext);
 const AuthContext = ({children}) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-
   const createUser = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
   };
@@ -53,7 +52,7 @@ const AuthContext = ({children}) => {
   return (
     <UserContext.Provider value={userInfo}>
       {loading ? (
-        <div className="h-screen flex flex-col justify-center items-center">
+        <div className="flex h-screen flex-col items-center justify-center">
           <LoaderSpinner />
         </div>
       ) : (

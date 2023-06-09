@@ -17,8 +17,7 @@ import Instructor from "../pages/Dashboard/Admin/InstructorClasses";
 import Classes from "../pages/Classes";
 import EnrolledClasses from "../pages/Dashboard/Student/EnrolledClasses";
 import PrivateForStudentRoutes from "./PrivateForStudentRoutes";
-import Enroll from "../pages/Enroll";
-import axiosURL from "../axios/axiosURL";
+import SelectedClasses from "../pages/Dashboard/Student/SelectedClasses";
 
 const Routes = createBrowserRouter([
   {
@@ -42,16 +41,6 @@ const Routes = createBrowserRouter([
     path: "/classes",
     element: <Classes />,
   },
-  // for student
-  {
-    path: "/enroll/:id",
-    element: (
-      <PrivateForStudentRoutes>
-        <Enroll />
-      </PrivateForStudentRoutes>
-    ),
-    loader: ({params}) => axiosURL.get(`/classes/${params.id}`),
-  },
   {
     path: "/dashboard",
     element: (
@@ -66,6 +55,14 @@ const Routes = createBrowserRouter([
           <PrivateRoutes>
             <UserDashboard />
           </PrivateRoutes>
+        ),
+      },
+      {
+        path: "selected-classes",
+        element: (
+          <PrivateForStudentRoutes>
+            <SelectedClasses />
+          </PrivateForStudentRoutes>
         ),
       },
       {

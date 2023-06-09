@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import Container from "../../components/Container";
 import useFetchData from "../../hooks/useFetchData";
 import LoaderSpinner from "../../components/LoaderSpinner";
-import ClassesCard from "./ClassesCard";
+import ClassCard from "../../components/ClassCard";
 const Classes = () => {
   const {data: users} = useFetchData(`/users`);
   const {data: loadedClasses, loading} = useFetchData(`/classes`);
@@ -30,7 +30,7 @@ const Classes = () => {
         ) : (
           <div className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {classData &&
-              classData.map((cls) => <ClassesCard key={cls._id} cls={cls} />)}
+              classData.map((cls) => <ClassCard key={cls._id} cls={cls} />)}
           </div>
         )}
       </Container>
