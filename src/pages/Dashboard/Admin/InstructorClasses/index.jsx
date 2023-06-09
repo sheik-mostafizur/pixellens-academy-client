@@ -21,7 +21,6 @@ const Instructor = () => {
 
   return (
     <div>
-      <h1>Instructor</h1>
       {loading ? (
         <LoaderSpinner />
       ) : (
