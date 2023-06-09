@@ -117,7 +117,7 @@ const ShowInstructorData = ({instructorClasses, refetch}) => {
               </div>
               {instCls?.feedback && (
                 <h4>
-                  <b>Email: </b>
+                  <b>Feedback: </b>
                   {instCls?.feedback}
                 </h4>
               )}

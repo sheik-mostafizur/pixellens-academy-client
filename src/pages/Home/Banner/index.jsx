@@ -6,14 +6,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 // import required modules
-import {Navigation} from "swiper";
+import {Autoplay, Navigation} from "swiper";
 import Slider1 from "./Slider1";
 import Slider2 from "./Slider2";
 import Slider3 from "./Slider3";
 
 const Banner = () => {
   return (
-    <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+    <Swiper
+      modules={[Navigation, Autoplay]} // Add Autoplay module
+      navigation={true}
+      autoplay={{delay: 3000}} // Set the delay for autoplay in milliseconds
+      className="mySwiper">
       <SwiperSlide>
         <Slider1 />
       </SwiperSlide>

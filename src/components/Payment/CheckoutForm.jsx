@@ -2,15 +2,14 @@ import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
 import "./CheckoutForm.css";
 import {useEffect, useState} from "react";
 import axiosURL from "../../axios/axiosURL";
+import Swal from "sweetalert2";
 
-const CheckoutForm = ({classData}) => {
+const CheckoutForm = ({carts, price, user}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-
-  const {price} = classData;
 
   useEffect(() => {
     if (price) {
@@ -40,7 +39,7 @@ const CheckoutForm = ({classData}) => {
     }
 
     // Use your card Element with other Stripe.js APIs
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
+    const {error} = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -56,8 +55,8 @@ const CheckoutForm = ({classData}) => {
         payment_method: {
           card: card,
           billing_details: {
-            name: classData?.name,
-            email: classData?.email,
+            name: user?.displayName, // name from props
+            email: user?.email,
           },
         },
       });
@@ -67,7 +66,28 @@ const CheckoutForm = ({classData}) => {
     if (paymentIntent.status === "succeeded") {
       const transactionId = paymentIntent.id;
       setTransactionId(transactionId);
-      setProcessing(false);
+
+      const payment = {
+        email: user?.email,
+        transactionId,
+        paymentDate: new Date(),
+        status: "pending",
+        price,
+        cartId: carts.map((cart) => cart._id),
+        classId: carts.map((cart) => cart.classId),
+      };
+      axiosURL.post("/payments", payment).then(({data}) => {
+        if (data.insertResult.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Payment successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setProcessing(false);
+        }
+      });
     }
   };
 

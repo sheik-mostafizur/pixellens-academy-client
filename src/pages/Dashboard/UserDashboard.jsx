@@ -5,8 +5,8 @@ const UserDashboard = () => {
   const {user} = uesAuthContext();
   const [userType] = useUserType();
   return (
-    <div className="space-y-8 text-3xl md:text-5xl">
-      <h1 className="font-bold">Your Dashboard</h1>
+    <div className="space-y-8 text-3xl">
+      <h1 className="font-bold md:text-5xl">Your Dashboard</h1>
 
       {user && (
         <div className="mx-auto max-w-3xl space-y-8 p-8 shadow">

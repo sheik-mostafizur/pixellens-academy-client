@@ -18,6 +18,7 @@ import Classes from "../pages/Classes";
 import EnrolledClasses from "../pages/Dashboard/Student/EnrolledClasses";
 import PrivateForStudentRoutes from "./PrivateForStudentRoutes";
 import SelectedClasses from "../pages/Dashboard/Student/SelectedClasses";
+import Payment from "../components/Payment";
 
 const Routes = createBrowserRouter([
   {
@@ -70,6 +71,14 @@ const Routes = createBrowserRouter([
         element: (
           <PrivateForStudentRoutes>
             <EnrolledClasses />
+          </PrivateForStudentRoutes>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivateForStudentRoutes>
+            <Payment />
           </PrivateForStudentRoutes>
         ),
       },

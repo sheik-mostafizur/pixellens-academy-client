@@ -6,8 +6,6 @@ import axiosURL from "../../axios/axiosURL";
 const ClassCard = ({cls}) => {
   const [userType] = useUserType();
   const [userDB, isUserDBLoading] = useFetchUserDB();
-  const bookingUserId = userDB?._id;
-  const isBooked = userDB?.selectedClasses;
   const {_id, className, imageURL, price, availableSeats, instructorName} = cls;
 
   const handleEnroll = () => {
@@ -20,10 +18,18 @@ const ClassCard = ({cls}) => {
         timer: 1500,
       });
     }
-    axiosURL
-      .patch(`/selected-classes/${bookingUserId}`, {selectedClass: _id})
-      .then(({data}) => {
-        if (data.matchedCount) {
+    if (userDB) {
+      const cart = {
+        classId: _id,
+        name: className,
+        imageURL: imageURL,
+        price: price,
+        instructorName: instructorName,
+        email: userDB.email,
+      };
+
+      axiosURL.post(`/carts`, cart).then(({data}) => {
+        if (data.insertedId) {
           Swal.fire({
             position: "center",
             icon: "success",
@@ -33,6 +39,7 @@ const ClassCard = ({cls}) => {
           });
         }
       });
+    }
   };
 
   const variants = {
@@ -89,11 +96,10 @@ const ClassCard = ({cls}) => {
               userType === "admin" ||
               userType === "instructor" ||
               availableSeats === 0 ||
-              isUserDBLoading ||
-              (isBooked && isBooked.includes(_id))
+              isUserDBLoading
             }
             className="btn">
-            {isBooked && isBooked.includes(_id) ? "Booked" : "Book Now"}
+            Book Now
           </button>
         </div>
       </div>
