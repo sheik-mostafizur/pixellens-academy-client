@@ -149,18 +149,18 @@ const Navbar = () => {
                 Classes
               </NavLink>
             </li>
-            <li>
-              {carts && (
+            {carts?.length > 0 && (
+              <li>
                 <Link to="/dashboard/selected-classes">
                   <span className="relative inline-block">
                     <BsFillCartCheckFill className="text-3xl text-gray-600" />
                     <span className="absolute right-0 top-0 inline-flex -translate-y-1/2 translate-x-1/2 transform items-center justify-center rounded-full bg-red-600 px-2 py-1 text-xs font-bold leading-none text-red-100">
-                      {carts.length}
+                      {carts?.length}
                     </span>
                   </span>
                 </Link>
-              )}
-            </li>
+              </li>
+            )}
             <li>
               {user?.email ? (
                 <></>

@@ -4,18 +4,33 @@ import axiosURL from "../../../../axios/axiosURL";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 
 const PaymentHistory = () => {
-  const [userDB, isUserDBLoading] = useFetchUserDB();
+  const [userDB] = useFetchUserDB();
   const [paymentHistory, setPaymentHistory] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axiosURL(`/payment-history/${userDB?._id}`).then(({data}) => {
       setPaymentHistory(data);
+      setIsLoading(false);
     });
   }, [userDB?._id]);
-
+  if (!paymentHistory?.length > 0)
+    return (
+      <>
+        {isLoading ? (
+          <LoaderSpinner />
+        ) : (
+          <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
+            Payment History Empty!
+          </h1>
+        )}
+      </>
+    );
   return (
     <div>
-      <h1>PaymentHistory</h1>
-      {isUserDBLoading ? (
+      <h1 className="mb-8 flex items-center justify-between gap-4 text-3xl font-bold text-primary-800">
+        PaymentHistory
+      </h1>
+      {isLoading ? (
         <LoaderSpinner />
       ) : (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -29,10 +44,10 @@ const PaymentHistory = () => {
                   Date
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Status
+                  Amount
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Cart IDs
+                  Status
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Class IDs
@@ -54,14 +69,10 @@ const PaymentHistory = () => {
                       {new Date(payment?.paymentDate).toLocaleTimeString()}
                     </th>
                     <th scope="row" className="px-6 py-4">
-                      {payment?.status}
+                      {payment?.price}
                     </th>
                     <th scope="row" className="px-6 py-4">
-                      {payment?.cartId.map((id) => (
-                        <span key={payment._id + id}>
-                          {id} <br />
-                        </span>
-                      ))}
+                      {payment?.status}
                     </th>
                     <th scope="row" className="px-6 py-4">
                       {payment?.classId.map((id) => (

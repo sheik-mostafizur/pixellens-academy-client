@@ -31,7 +31,18 @@ const SelectedClasses = () => {
       }
     });
   };
-
+  if (!carts?.length > 0)
+    return (
+      <>
+        {loading ? (
+          <LoaderSpinner />
+        ) : (
+          <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
+            Selected Classes Empty!
+          </h1>
+        )}
+      </>
+    );
   return (
     <div>
       <div className="mb-8 flex items-center justify-between gap-4 text-3xl font-bold text-primary-800">
@@ -44,67 +55,63 @@ const SelectedClasses = () => {
       {loading ? (
         <LoaderSpinner />
       ) : (
-        <>
-          {carts && (
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-                <thead className="text-xs uppercase text-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">
-                      Class Name
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Price
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Instructor
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+            <thead className="text-xs uppercase text-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Class Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Price
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Instructor
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Action
+                </th>
+              </tr>
+            </thead>
 
-                <tbody>
-                  {carts &&
-                    carts.map((cls) => (
-                      <tr
-                        key={cls._id}
-                        className="border-b border-gray-200 dark:border-gray-700">
-                        <th
-                          scope="row"
-                          className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={cls?.imageURL}
-                            alt={cls?.name}
-                          />
-                          <div className="pl-3">
-                            <div className="text-base font-semibold">
-                              {cls?.name}
-                            </div>
-                          </div>
-                        </th>
-                        <th scope="row" className="px-6 py-4">
-                          {cls?.price}
-                        </th>
-                        <th scope="row" className="px-6 py-4">
-                          {cls?.instructorName}
-                        </th>
-                        <td className="px-6 py-4">
-                          <button
-                            onClick={() => handleRemoveClass(cls._id)}
-                            className="text-3xl text-red-600">
-                            <AiFillDelete />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </>
+            <tbody>
+              {carts &&
+                carts.map((cls) => (
+                  <tr
+                    key={cls._id}
+                    className="border-b border-gray-200 dark:border-gray-700">
+                    <th
+                      scope="row"
+                      className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={cls?.imageURL}
+                        alt={cls?.name}
+                      />
+                      <div className="pl-3">
+                        <div className="text-base font-semibold">
+                          {cls?.name}
+                        </div>
+                      </div>
+                    </th>
+                    <th scope="row" className="px-6 py-4">
+                      {cls?.price}
+                    </th>
+                    <th scope="row" className="px-6 py-4">
+                      {cls?.instructorName}
+                    </th>
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={() => handleRemoveClass(cls._id)}
+                        className="text-3xl text-red-600">
+                        <AiFillDelete />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

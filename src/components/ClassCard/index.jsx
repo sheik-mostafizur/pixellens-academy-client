@@ -3,13 +3,21 @@ import Swal from "sweetalert2";
 import useUserType from "../../hooks/useUserType";
 import useFetchUserDB from "../../hooks/useFetchUserDB";
 import axiosURL from "../../axios/axiosURL";
+import useFetchEnrolledClassesDB from "../../hooks/useFetchEnrolledClassesDB";
+import useFetchData from "../../hooks/useFetchData";
 const ClassCard = ({cls}) => {
   const [userType] = useUserType();
-  const [userDB, isUserDBLoading] = useFetchUserDB();
+  const [userDB] = useFetchUserDB();
+  const {data: cartsData, refetch} = useFetchData(`/carts/${userDB?.email}`);
   const {_id, className, imageURL, price, availableSeats, instructorName} = cls;
 
+  // get enrolled Classes and collect classes ids
+  const [enrolledClassesDB] = useFetchEnrolledClassesDB();
+  const bookedIds = enrolledClassesDB?.map((ids) => ids._id);
+  const cartIds = cartsData?.map((ids) => ids.classId);
+
   const handleEnroll = () => {
-    if (!userType) {
+    if (!userType || bookedIds?.includes(_id) || cartIds?.includes(_id)) {
       return Swal.fire({
         position: "center",
         icon: "warning",
@@ -37,6 +45,7 @@ const ClassCard = ({cls}) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          refetch();
         }
       });
     }
@@ -96,10 +105,13 @@ const ClassCard = ({cls}) => {
               userType === "admin" ||
               userType === "instructor" ||
               availableSeats === 0 ||
-              isUserDBLoading
+              bookedIds?.includes(_id) ||
+              cartIds?.includes(_id)
             }
             className="btn">
-            Book Now
+            {bookedIds?.includes(_id) || cartIds?.includes(_id)
+              ? "Booked"
+              : "Book Now"}
           </button>
         </div>
       </div>

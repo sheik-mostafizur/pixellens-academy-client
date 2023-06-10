@@ -4,6 +4,8 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Banner from "./Banner";
 import PopularClasses from "./PopularClasses";
+import PopularInstructors from "./PopularInstructors";
+import PhotographyGallery from "./PhotographyGallery";
 
 const Home = () => {
   return (
@@ -19,7 +21,8 @@ const Home = () => {
       </header>
 
       <PopularClasses />
-
+      <PopularInstructors />
+      <PhotographyGallery />
       <Footer />
     </>
   );
