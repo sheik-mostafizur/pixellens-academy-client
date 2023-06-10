@@ -35,7 +35,7 @@ const SelectedClasses = () => {
   return (
     <div>
       <div className="mb-8 flex items-center justify-between gap-4 text-3xl font-bold text-primary-800">
-        <h2>Selected Classes: {carts.length}</h2>
+        <h2>Selected Classes: {carts?.length}</h2>
         <h2>Total Price: ${price}</h2>
         <Link to="/dashboard/payment">
           <button className="btn">Pay Now</button>

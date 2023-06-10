@@ -19,6 +19,7 @@ import EnrolledClasses from "../pages/Dashboard/Student/EnrolledClasses";
 import PrivateForStudentRoutes from "./PrivateForStudentRoutes";
 import SelectedClasses from "../pages/Dashboard/Student/SelectedClasses";
 import Payment from "../components/Payment";
+import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
 
 const Routes = createBrowserRouter([
   {
@@ -79,6 +80,14 @@ const Routes = createBrowserRouter([
         element: (
           <PrivateForStudentRoutes>
             <Payment />
+          </PrivateForStudentRoutes>
+        ),
+      },
+      {
+        path: "payment-history",
+        element: (
+          <PrivateForStudentRoutes>
+            <PaymentHistory />
           </PrivateForStudentRoutes>
         ),
       },

@@ -8,7 +8,7 @@ const EnrolledClasses = () => {
   return (
     <div>
       <h2 className="mb-8 flex items-center justify-between gap-4 text-3xl font-bold text-primary-800">
-        Total Enrolled: {enrolledClassesDB.length}
+        Total Enrolled: {enrolledClassesDB?.length}
       </h2>
       {isEnrolledClassesDBLoading ? (
         <LoaderSpinner />
