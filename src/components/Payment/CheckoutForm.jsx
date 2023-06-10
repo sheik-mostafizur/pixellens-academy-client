@@ -55,7 +55,7 @@ const CheckoutForm = ({carts, price, user}) => {
         payment_method: {
           card: card,
           billing_details: {
-            name: user?.displayName, // name from props
+            name: user?.name,
             email: user?.email,
           },
         },
@@ -68,7 +68,7 @@ const CheckoutForm = ({carts, price, user}) => {
       setTransactionId(transactionId);
 
       const payment = {
-        email: user?.email,
+        studentId: user?._id,
         transactionId,
         paymentDate: new Date(),
         status: "pending",
