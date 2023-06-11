@@ -1,23 +1,6 @@
 import {BiEdit} from "react-icons/bi";
 import {Link} from "react-router-dom";
-import {AiFillDelete} from "react-icons/ai";
-import axiosURL from "../../../../axios/axiosURL";
-import Swal from "sweetalert2";
-
 const TableMyClasses = ({classes}) => {
-  const handleRemoveClass = (_id) => {
-    axiosURL.delete(`/instructor-classes/${_id}`).then(({data}) => {
-      if (data.deletedCount) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Deleted successfully!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
-  };
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
@@ -85,17 +68,12 @@ const TableMyClasses = ({classes}) => {
                   </span>
                 </th>
                 <td className="px-6 py-4">{cls?.feedback}</td>
-                <td className="flex items-center gap-4 bg-gray-50 px-6 py-4 dark:bg-gray-800">
+                <td className="bg-gray-50 px-6 py-4 dark:bg-gray-800">
                   <Link to={`/dashboard/update-class/${cls._id}`}>
-                    <button className="text-3xl text-primary-900">
+                    <button className="btn text-2xl">
                       <BiEdit />
                     </button>
                   </Link>
-                  <button
-                    onClick={() => handleRemoveClass(cls._id)}
-                    className="text-3xl text-red-600">
-                    <AiFillDelete />
-                  </button>
                 </td>
               </tr>
             ))}

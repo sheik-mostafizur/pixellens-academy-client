@@ -45,6 +45,7 @@ const CheckoutForm = ({carts, price, user}) => {
     });
 
     if (error) {
+      console.clear()
       console.log("[error]", error); // TODO you can show this error your UI.
     } else {
       // console.log("[PaymentMethod]", paymentMethod);

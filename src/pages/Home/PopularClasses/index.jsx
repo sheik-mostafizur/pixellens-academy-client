@@ -24,7 +24,7 @@ const PopularClasses = () => {
         {loading ? <LoaderSpinner /> : ""}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {popularClasses &&
-            popularClasses.map((popularCls) => (
+            popularClasses.slice(0,6).map((popularCls) => (
               <ClassCard key={popularCls._id} cls={popularCls} />
             ))}
         </div>

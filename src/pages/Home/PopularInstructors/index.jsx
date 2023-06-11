@@ -16,10 +16,10 @@ const PopularInstructors = () => {
         ) : (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {instructors &&
-              instructors.map((instruct) => {
+              instructors.slice(0, 6).map((instruct) => {
                 return (
                   <motion.div
-                    whileHover={{scale: 1.10}}
+                    whileHover={{scale: 1.1}}
                     variants={{
                       hidden: {opacity: 0, scale: 0.8},
                       visible: {opacity: 1, scale: 1},
@@ -33,7 +33,7 @@ const PopularInstructors = () => {
                       <img
                         src={instruct.photoURL}
                         alt={instruct.name}
-                        className="mx-auto max-w-xs rounded-full object-cover"
+                        className="mx-auto h-[320px] w-[320px] rounded-full object-cover"
                       />
                     </div>
                     <div className="mb-4 text-center">

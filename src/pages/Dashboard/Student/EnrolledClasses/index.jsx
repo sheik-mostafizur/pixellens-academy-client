@@ -9,12 +9,18 @@ const EnrolledClasses = () => {
   if (!enrolledClassesDB?.length > 0)
     return (
       <>
-        <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
-          Enrolled Classes Empty!
-        </h1>
-        <Helmet>
-          <title>Enrolled Classes Empty | PixelLens Academy</title>
-        </Helmet>
+        {isEnrolledClassesDBLoading ? (
+          <LoaderSpinner />
+        ) : (
+          <>
+            <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
+              Enrolled Classes Empty!
+            </h1>
+            <Helmet>
+              <title>Enrolled Classes Empty | PixelLens Academy</title>
+            </Helmet>
+          </>
+        )}
       </>
     );
   return (

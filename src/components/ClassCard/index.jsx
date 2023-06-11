@@ -9,7 +9,15 @@ const ClassCard = ({cls}) => {
   const [userType] = useUserType();
   const [userDB] = useFetchUserDB();
   const {data: cartsData, refetch} = useFetchData(`/carts/${userDB?.email}`);
-  const {_id, className, imageURL, price, availableSeats, instructorName} = cls;
+  const {
+    _id,
+    className,
+    imageURL,
+    price,
+    availableSeats,
+    enrolled,
+    instructorName,
+  } = cls;
 
   // get enrolled Classes and collect classes ids
   const [enrolledClassesDB] = useFetchEnrolledClassesDB();
@@ -94,6 +102,10 @@ const ClassCard = ({cls}) => {
         <h3>
           <b>Available seats: </b>
           {availableSeats}
+        </h3>
+        <h3>
+          <b>Enrolled: </b>
+          {enrolled}
         </h3>
         <h3>
           <b>Price: </b>

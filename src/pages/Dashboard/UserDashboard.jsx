@@ -1,31 +1,34 @@
-import {uesAuthContext} from "../../context/AuthContext";
-import useUserType from "../../hooks/useUserType";
+import useFetchUserDB from "../../hooks/useFetchUserDB";
 
 const UserDashboard = () => {
-  const {user} = uesAuthContext();
-  const [userType] = useUserType();
+  const [userDB] = useFetchUserDB();
+
   return (
     <div className="space-y-8 text-3xl">
       <h1 className="text-center font-bold md:text-5xl">Your Dashboard</h1>
 
-      {user && (
+      {userDB && (
         <div className="mx-auto w-fit space-y-8 p-8 shadow">
           <img
             className="mx-auto max-w-xs"
-            src={user?.photoURL}
-            alt={user?.displayName}
+            src={userDB?.photoURL}
+            alt={userDB?.displayName}
           />
           <h2>
+            <b>ID: </b>
+            {userDB?._id}
+          </h2>
+          <h2>
             <b>Name: </b>
-            {user?.displayName}
+            {userDB?.name}
           </h2>
           <h2>
             <b>Email: </b>
-            {user?.email}
+            {userDB?.email}
           </h2>
           <h2>
-            <b>User: </b>
-            {userType}
+            <b>user: </b>
+            {userDB?.userType}
           </h2>
         </div>
       )}

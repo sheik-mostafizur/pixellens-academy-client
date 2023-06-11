@@ -9,7 +9,7 @@ const InstructorCard = ({instructor}) => {
       className="flex flex-col items-center justify-center rounded-t-lg border-b border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800 md:rounded-t-none md:rounded-tl-lg md:border-r">
       <figcaption className="space-x-3">
         <img
-          className="mx-auto max-w-[150px] rounded-full"
+          className="mx-auto h-[150px] w-[150px] rounded-full object-cover"
           src={photoURL}
           alt="profile picture"
         />

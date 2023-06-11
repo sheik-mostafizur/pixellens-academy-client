@@ -38,6 +38,17 @@ const Users = () => {
       }
     });
   };
+
+  const usersLength = {admin: 0, instructor: 0, student: 0};
+  users.forEach((user) => {
+    if (user?.userType === "admin") {
+      usersLength.admin += 1;
+    } else if (user?.userType === "instructor") {
+      usersLength.instructor += 1;
+    } else if (user?.userType === "student") {
+      usersLength.student += 1;
+    }
+  });
   return (
     <div>
       <Helmet>
@@ -46,67 +57,80 @@ const Users = () => {
       {loading ? (
         <LoaderSpinner />
       ) : (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-            <thead className="text-xs uppercase text-gray-700 dark:text-gray-400">
-              <tr>
-                <th
-                  scope="col"
-                  className="bg-gray-50 px-6 py-3 dark:bg-gray-800">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Email
-                </th>
-                <th
-                  scope="col"
-                  className="bg-gray-50 px-6 py-3 dark:bg-gray-800">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {users &&
-                users.map((user) => (
-                  <tr
-                    key={user._id}
-                    className="border-b border-gray-200 dark:border-gray-700">
-                    <th
-                      scope="row"
-                      className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={user?.photoURL}
-                        alt={user?.name}
-                      />
-                      <div className="pl-3">
-                        <div className="text-base font-semibold">
-                          {user?.name}
+        <>
+          <div className="mb-8 flex items-center justify-between text-3xl">
+            <h2>
+              Admins: <b>{usersLength?.admin}</b>
+            </h2>
+            <h2>
+              Instructors: <b>{usersLength?.instructor}</b>
+            </h2>
+            <h2>
+              Students: <b>{usersLength?.student}</b>
+            </h2>
+          </div>
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+              <thead className="text-xs uppercase text-gray-700 dark:text-gray-400">
+                <tr>
+                  <th
+                    scope="col"
+                    className="bg-gray-50 px-6 py-3 dark:bg-gray-800">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Email
+                  </th>
+                  <th
+                    scope="col"
+                    className="bg-gray-50 px-6 py-3 dark:bg-gray-800">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {users &&
+                  users.map((user) => (
+                    <tr
+                      key={user._id}
+                      className="border-b border-gray-200 dark:border-gray-700">
+                      <th
+                        scope="row"
+                        className="flex items-center whitespace-nowrap bg-gray-50 px-6 py-4 text-gray-900 dark:bg-gray-800 dark:text-white">
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src={user?.photoURL}
+                          alt={user?.name}
+                        />
+                        <div className="pl-3">
+                          <div className="text-base font-semibold">
+                            {user?.name}
+                          </div>
                         </div>
-                      </div>
-                    </th>
-                    <td className="px-6 py-4">{user.email}</td>
-                    <td className="bg-gray-50 px-6 py-4 dark:bg-gray-800">
-                      <button
-                        onClick={() =>
-                          handleMakeInstructor(user._id, user.name)
-                        }
-                        className="btn me-1 text-2xl"
-                        disabled={user?.userType === "instructor"}>
-                        <GiTeacher />
-                      </button>
-                      <button
-                        onClick={() => handleMakeAdmin(user._id, user.name)}
-                        className="btn text-2xl"
-                        disabled={user?.userType === "admin"}>
-                        <RiAdminFill />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+                      </th>
+                      <td className="px-6 py-4">{user.email}</td>
+                      <td className="bg-gray-50 px-6 py-4 dark:bg-gray-800">
+                        <button
+                          onClick={() =>
+                            handleMakeInstructor(user._id, user.name)
+                          }
+                          className="btn me-1 text-2xl"
+                          disabled={user?.userType === "instructor"}>
+                          <GiTeacher />
+                        </button>
+                        <button
+                          onClick={() => handleMakeAdmin(user._id, user.name)}
+                          className="btn text-2xl"
+                          disabled={user?.userType === "admin"}>
+                          <RiAdminFill />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );
