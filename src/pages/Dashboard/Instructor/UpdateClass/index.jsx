@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import axiosURL from "../../../../axios/axiosURL";
 import {useParams} from "react-router-dom";
 import useFetchData from "../../../../hooks/useFetchData";
+import {Helmet} from "react-helmet-async";
 
 const imgHostingToken = import.meta.env.VITE_Image_Upload_token;
 
@@ -82,6 +83,9 @@ const UpdateClass = () => {
     "peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500";
   return (
     <div>
+      <Helmet>
+        <title>Update Your Class | PixelLens Academy</title>
+      </Helmet>
       {loading ? (
         <LoaderSpinner />
       ) : (

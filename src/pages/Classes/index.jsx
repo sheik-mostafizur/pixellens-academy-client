@@ -19,7 +19,7 @@ const Classes = () => {
   return (
     <div>
       <Helmet>
-        <title>Instructors| PixelLens Academy</title>
+        <title>Classes| PixelLens Academy</title>
       </Helmet>
       <header>
         <Navbar />

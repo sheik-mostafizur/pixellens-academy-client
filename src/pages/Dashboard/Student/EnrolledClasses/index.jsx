@@ -1,3 +1,4 @@
+import {Helmet} from "react-helmet-async";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import useFetchEnrolledClassesDB from "../../../../hooks/useFetchEnrolledClassesDB";
 
@@ -11,10 +12,16 @@ const EnrolledClasses = () => {
         <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
           Enrolled Classes Empty!
         </h1>
+        <Helmet>
+          <title>Enrolled Classes Empty | PixelLens Academy</title>
+        </Helmet>
       </>
     );
   return (
     <div>
+      <Helmet>
+        <title>Enrolled Classes | PixelLens Academy</title>
+      </Helmet>
       <h2 className="mb-8 flex items-center justify-between gap-4 text-3xl font-bold text-primary-800">
         Total Enrolled: {enrolledClassesDB?.length}
       </h2>

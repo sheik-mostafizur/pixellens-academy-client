@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import useFetchUserDB from "../../../../hooks/useFetchUserDB";
 import axiosURL from "../../../../axios/axiosURL";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
+import {Helmet} from "react-helmet-async";
 
 const PaymentHistory = () => {
   const [userDB] = useFetchUserDB();
@@ -19,14 +20,22 @@ const PaymentHistory = () => {
         {isLoading ? (
           <LoaderSpinner />
         ) : (
-          <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
-            Payment History Empty!
-          </h1>
+          <>
+            <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
+              Payment History Empty!
+            </h1>
+            <Helmet>
+              <title>Payment History Empty | PixelLens Academy</title>
+            </Helmet>
+          </>
         )}
       </>
     );
   return (
     <div>
+      <Helmet>
+        <title>Payment History | PixelLens Academy</title>
+      </Helmet>
       <h1 className="mb-8 flex items-center justify-between gap-4 text-3xl font-bold text-primary-800">
         PaymentHistory
       </h1>

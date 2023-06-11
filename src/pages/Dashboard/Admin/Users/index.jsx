@@ -4,6 +4,7 @@ import {RiAdminFill} from "react-icons/ri";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import axiosURL from "../../../../axios/axiosURL";
 import useFetchData from "../../../../hooks/useFetchData";
+import {Helmet} from "react-helmet-async";
 
 const Users = () => {
   const {data: users, loading, refetch} = useFetchData("/users");
@@ -39,6 +40,9 @@ const Users = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Manage Users | PixelLens Academy</title>
+      </Helmet>
       {loading ? (
         <LoaderSpinner />
       ) : (

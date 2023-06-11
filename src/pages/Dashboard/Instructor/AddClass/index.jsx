@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {Helmet} from "react-helmet-async";
 import {useForm} from "react-hook-form";
 import {uesAuthContext} from "../../../../context/AuthContext";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
@@ -65,6 +66,9 @@ const AddClass = () => {
     "peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500";
   return (
     <div>
+      <Helmet>
+        <title>Add A New Class | PixelLens Academy</title>
+      </Helmet>
       {loading ? (
         <LoaderSpinner />
       ) : (
@@ -72,7 +76,7 @@ const AddClass = () => {
           <h1 className="mb-20 text-center text-3xl font-bold md:text-5xl">
             Add a new class
           </h1>
-          <form onSubmit={handleSubmit(onSubmit)}  className="mx-auto max-w-3xl">
+          <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-3xl">
             <div className="grid md:grid-cols-2 md:gap-6">
               <div className="group relative z-0 mb-6 w-full">
                 <input

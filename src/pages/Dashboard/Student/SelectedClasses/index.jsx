@@ -5,6 +5,7 @@ import {uesAuthContext} from "../../../../context/AuthContext";
 import useFetchData from "../../../../hooks/useFetchData";
 import {AiFillDelete} from "react-icons/ai";
 import {Link} from "react-router-dom";
+import {Helmet} from "react-helmet-async";
 
 const SelectedClasses = () => {
   const {user} = uesAuthContext();
@@ -31,20 +32,31 @@ const SelectedClasses = () => {
       }
     });
   };
-  if (!carts?.length > 0)
+  if (!carts?.length > 0) {
     return (
       <>
         {loading ? (
           <LoaderSpinner />
         ) : (
-          <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
-            Selected Classes Empty!
-          </h1>
+          <>
+            <h1 className="py-8 text-center text-3xl font-bold text-red-600 md:text-5xl">
+              Selected Classes Empty!
+            </h1>
+            <Helmet>
+              <title>Cart Is Empty | PixelLens Academy</title>
+            </Helmet>
+          </>
         )}
       </>
     );
+  }
+
   return (
     <div>
+      <Helmet>
+        <title>Cart Classes | PixelLens Academy</title>
+      </Helmet>
+
       <div className="mb-8 flex items-center justify-between gap-4 text-3xl font-bold text-primary-800">
         <h2>Selected Classes: {carts?.length}</h2>
         <h2>Total Price: ${price}</h2>

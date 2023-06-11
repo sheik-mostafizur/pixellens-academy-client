@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import {useCallback} from "react";
 import axiosURL from "../../axios/axiosURL";
+import {Helmet} from "react-helmet-async";
 
 const Register = () => {
   const {createUser, logInUserWithGoogle} = uesAuthContext();
@@ -140,6 +141,9 @@ const Register = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Register A New Account | PixelLens Academy</title>
+      </Helmet>
       <header>
         <Navbar />
       </header>

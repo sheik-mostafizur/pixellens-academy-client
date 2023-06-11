@@ -3,6 +3,7 @@ import LoaderSpinner from "../../../../components/LoaderSpinner";
 import TableMyClasses from "./TableMyClasses";
 import axiosURL from "../../../../axios/axiosURL";
 import useFetchUserDB from "../../../../hooks/useFetchUserDB";
+import {Helmet} from "react-helmet-async";
 
 const MyClasses = () => {
   const [userDB, isUserDBLoading] = useFetchUserDB();
@@ -21,6 +22,9 @@ const MyClasses = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Classes | PixelLens Academy</title>
+      </Helmet>
       <h1 className="mb-8 text-center text-3xl font-bold md:text-5xl">
         My Classes
       </h1>

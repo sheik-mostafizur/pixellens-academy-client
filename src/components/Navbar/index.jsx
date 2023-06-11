@@ -86,6 +86,8 @@ const Navbar = () => {
                     type="checkbox"
                     onClick={handleTheme}
                     className="toggle"
+                    checked={theme == "dark" ? false : true}
+                    readOnly
                   />
                 </li>
                 <li>

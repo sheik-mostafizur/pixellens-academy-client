@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import {uesAuthContext} from "../../../../context/AuthContext";
 import useFetchData from "../../../../hooks/useFetchData";
@@ -21,6 +22,9 @@ const Instructor = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Manage Classes | PixelLens Academy</title>
+      </Helmet>
       {loading ? (
         <LoaderSpinner />
       ) : (
