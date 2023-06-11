@@ -34,10 +34,10 @@ const Navbar = () => {
         <Link to="/" className="flex items-center">
           <img
             src={LogoLightMode}
-            className="mr-3 h-16"
+            className="mr-3 h-12 md:h-16"
             alt="PixelLens Academy"
           />
-          <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+          <span className="self-center whitespace-nowrap md:text-2xl font-semibold dark:text-white">
             PixelLensAcademy
           </span>
         </Link>
@@ -48,7 +48,8 @@ const Navbar = () => {
             <button
               onClick={toggleUserDetails}
               type="button"
-              className="mr-3 flex rounded-full bg-primary-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
+              data-tip={"Dashboard: " + user?.displayName}
+              className="tooltip tooltip-left mr-3 flex rounded-full bg-primary-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
               id="user-menu-button"
               aria-expanded="false"
               data-dropdown-toggle="user-dropdown"

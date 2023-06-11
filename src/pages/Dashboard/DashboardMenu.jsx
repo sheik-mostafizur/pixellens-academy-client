@@ -1,16 +1,25 @@
 import {useState} from "react";
 import {AiFillHome} from "react-icons/ai";
 import {MdSpaceDashboard} from "react-icons/md";
+import {FaSignOutAlt} from "react-icons/fa";
 import {Link} from "react-router-dom";
 import useUserType from "../../hooks/useUserType";
 import AdminMenu from "./Admin/AdminMenu";
 import InstructorMenu from "./Instructor/InstructorMenu";
 import StudentMenu from "./Student/StudentMenu";
+import {uesAuthContext} from "../../context/AuthContext";
 
 const DashboardMenu = () => {
+  const {logOutUser} = uesAuthContext();
   const [toggleMenu, setToggleMenu] = useState(false);
   const handleToggleMenu = () => setToggleMenu(!toggleMenu);
   const [userType] = useUserType();
+
+  const handleLoggedOut = () => {
+    logOutUser()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
 
   return (
     <>
@@ -42,7 +51,7 @@ const DashboardMenu = () => {
           toggleMenu ? "" : "-translate-x-full"
         } transition-transform sm:translate-x-0`}
         aria-label="Sidebar">
-        <div className="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800">
+        <div className="flex h-full flex-col justify-between overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             <li>
               <Link
@@ -69,6 +78,14 @@ const DashboardMenu = () => {
             {/* admin menu */}
             {userType === "admin" && <AdminMenu />}
           </ul>
+          <div>
+            <button
+              onClick={handleLoggedOut}
+              className="flex w-full items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <FaSignOutAlt className="me-2 text-2xl text-primary-900" />
+              Sign out
+            </button>
+          </div>
         </div>
       </aside>
     </>

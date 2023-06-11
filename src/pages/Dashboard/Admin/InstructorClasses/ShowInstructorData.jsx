@@ -4,8 +4,27 @@ import {uesAuthContext} from "../../../../context/AuthContext";
 import axiosURL from "../../../../axios/axiosURL";
 const ShowInstructorData = ({instructorClasses, refetch}) => {
   const {user} = uesAuthContext();
-  // **Class Image, Class name, Instructor name, Instructor email, Available seats, Price, Status(pending/approved/denied) 3 buttons( Approve, Deny and send feedback)**.
+
   const handleStatus = (_id, status) => {
+    if (status === "approved") {
+      return axiosURL
+        .patch(`/admin/${user?.email}/classes/${_id}`, {
+          status: status,
+        })
+        .then(({data}) => {
+          if (data.matchedCount) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Approved successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            return refetch();
+          }
+        });
+    }
+
     Swal.fire({
       title: "Are you sure?",
       input: "text",
@@ -43,7 +62,7 @@ const ShowInstructorData = ({instructorClasses, refetch}) => {
     });
   };
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {instructorClasses.map((instCls) => {
         const isPending = instCls.status === "pending" ? false : true;
         const cardBgColor =

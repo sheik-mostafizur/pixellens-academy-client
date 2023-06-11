@@ -81,8 +81,30 @@ const Register = () => {
   // google authentication handle
   const handleLoginWithGoogle = () => {
     logInUserWithGoogle()
-      .then(() => {
+      .then(({user}) => {
         setError("");
+        const savedUserDB = {
+          name: user?.displayName,
+          email: user?.email,
+          photoURL: user?.photoURL,
+          userType: "student",
+        };
+        axiosURL
+          .post("/users", savedUserDB)
+          .then((response) => {
+            if (response.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Account created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         navigate("/");
       })
       .catch((error) => setError("logInUser", error.message));
@@ -134,7 +156,7 @@ const Register = () => {
                 alt="google"
                 className="inline-block h-8 w-8"
               />
-              Sign up with Google
+              Continue with Google
             </button>
           </div>
           <div className="inline-flex w-full items-center justify-center">

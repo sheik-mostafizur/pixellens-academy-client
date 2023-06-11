@@ -1,4 +1,5 @@
 import {BiEdit} from "react-icons/bi";
+import {Link} from "react-router-dom";
 const TableMyClasses = ({classes}) => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -53,13 +54,26 @@ const TableMyClasses = ({classes}) => {
                 <th
                   scope="row"
                   className="bg-gray-50 px-6 py-4 dark:bg-gray-800">
-                  {cls?.status}
+                  <span
+                    className={`rounded px-2 py-1 text-white
+                      ${
+                        cls?.status === "denied"
+                          ? "bg-red-600"
+                          : cls?.status === "approved"
+                          ? "bg-green-600"
+                          : "bg-yellow-500"
+                      }
+                    `}>
+                    {cls?.status}
+                  </span>
                 </th>
                 <td className="px-6 py-4">{cls?.feedback}</td>
                 <td className="bg-gray-50 px-6 py-4 dark:bg-gray-800">
-                  <button className="btn text-2xl">
-                    <BiEdit />
-                  </button>
+                  <Link to={`/dashboard/update-class/${cls._id}`}>
+                    <button className="btn text-2xl">
+                      <BiEdit />
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}

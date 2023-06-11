@@ -74,6 +74,7 @@ const ClassCard = ({cls}) => {
 
   return (
     <motion.div
+      whileHover={{scale: 1.05}}
       initial="initial"
       animate="animate"
       exit="exit"

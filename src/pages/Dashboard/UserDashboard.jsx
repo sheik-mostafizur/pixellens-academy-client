@@ -6,11 +6,15 @@ const UserDashboard = () => {
   const [userType] = useUserType();
   return (
     <div className="space-y-8 text-3xl">
-      <h1 className="font-bold md:text-5xl">Your Dashboard</h1>
+      <h1 className="text-center font-bold md:text-5xl">Your Dashboard</h1>
 
       {user && (
-        <div className="mx-auto max-w-3xl space-y-8 p-8 shadow">
-          <img src={user?.photoURL} alt="" />
+        <div className="mx-auto w-fit space-y-8 p-8 shadow">
+          <img
+            className="mx-auto max-w-xs"
+            src={user?.photoURL}
+            alt={user?.displayName}
+          />
           <h2>
             <b>Name: </b>
             {user?.displayName}

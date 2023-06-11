@@ -4,10 +4,15 @@ import {uesAuthContext} from "../../../../context/AuthContext";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
 import Swal from "sweetalert2";
 import axiosURL from "../../../../axios/axiosURL";
+import {useParams} from "react-router-dom";
+import useFetchData from "../../../../hooks/useFetchData";
 
 const imgHostingToken = import.meta.env.VITE_Image_Upload_token;
 
-const AddClass = () => {
+const UpdateClass = () => {
+  const {id} = useParams();
+  const {data: prevData, refetch} = useFetchData(`/update-class/${id}`);
+
   const [userFromDB, setUserFromDB] = useState({});
   const {user} = uesAuthContext();
   const [loading, setLoading] = useState(true);
@@ -15,7 +20,6 @@ const AddClass = () => {
     register,
     handleSubmit,
     formState: {errors},
-    reset,
   } = useForm();
 
   const imgHostingURL = `https://api.imgbb.com/1/upload?key=${imgHostingToken}`;
@@ -28,15 +32,27 @@ const AddClass = () => {
   }, [user?.email]);
 
   const onSubmit = (data) => {
-    data.instructorId = userFromDB?._id;
-    data.enrolled = 0;
-    data.status = "pending";
     data.price = parseFloat(data.price);
     data.availableSeats = parseInt(data.availableSeats);
 
+    if (prevData?.imageURL !== "") {
+      return axiosURL
+        .patch(`/update-class/${prevData?._id}`, data)
+        .then(({data}) => {
+          if (data?.modifiedCount) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Updated success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            refetch();
+          }
+        });
+    }
     const formData = new FormData();
     formData.append("image", data.imageURL[0]);
-
     fetch(imgHostingURL, {
       method: "POST",
       body: formData,
@@ -45,15 +61,16 @@ const AddClass = () => {
       .then((imgResponse) => {
         if (imgResponse.success) {
           data.imageURL = imgResponse.data.display_url;
-          axiosURL.post(`/classes`, data).then(() => {
-            reset();
+          prevData.imageURL = data.imageURL;
+          axiosURL.patch(`/update-class/${prevData?._id}`, data).then(() => {
             Swal.fire({
               position: "center",
               icon: "success",
-              title: "Class add success",
+              title: "Updated success",
               showConfirmButton: false,
               timer: 1500,
             });
+            refetch();
           });
         }
       });
@@ -70,9 +87,9 @@ const AddClass = () => {
       ) : (
         <>
           <h1 className="mb-20 text-center text-3xl font-bold md:text-5xl">
-            Add a new class
+            Update your class
           </h1>
-          <form onSubmit={handleSubmit(onSubmit)}  className="mx-auto max-w-3xl">
+          <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-3xl">
             <div className="grid md:grid-cols-2 md:gap-6">
               <div className="group relative z-0 mb-6 w-full">
                 <input
@@ -107,6 +124,7 @@ const AddClass = () => {
                 className={inputStyle}
                 {...register("className", {required: "Class Name is required"})}
                 placeholder=" "
+                defaultValue={prevData?.className}
               />
               <label htmlFor="className" className={labelStyle}>
                 Class Name
@@ -127,6 +145,7 @@ const AddClass = () => {
                     required: "Available Seats is required",
                   })}
                   placeholder=" "
+                  defaultValue={prevData?.availableSeats}
                 />
                 <label htmlFor="availableSeats" className={labelStyle}>
                   Available Seats
@@ -144,6 +163,7 @@ const AddClass = () => {
                   className={inputStyle}
                   {...register("price", {required: "Price is required"})}
                   placeholder=" "
+                  defaultValue={prevData?.price}
                 />
                 <label htmlFor="price" className={labelStyle}>
                   Price
@@ -154,19 +174,39 @@ const AddClass = () => {
               </div>
             </div>
             <div className="mb-6">
-              <input
-                type="file"
-                className="file-input-bordered file-input w-full cursor-pointer"
-                {...register("imageURL", {required: "Image URL is required"})}
-              />
-              {errors?.price && (
-                <span className="text-red-600">
-                  {errors?.imageURL?.message}
-                </span>
+              {prevData?.imageURL === "" ? (
+                <input
+                  type="file"
+                  className="file-input-bordered file-input w-full cursor-pointer"
+                  {...register("imageURL", {required: "Image URL is required"})}
+                />
+              ) : (
+                <div className="relative">
+                  <img src={prevData?.imageURL} alt={prevData?.className} />
+                  <button
+                    onClick={() => {
+                      prevData.imageURL = "";
+                    }}
+                    className="btn bg-red-700 hover:bg-red-600">
+                    Remove
+                  </button>
+                </div>
+              )}
+
+              {errors?.imageURL && (
+                <p className="text-red-600">{errors?.imageURL?.message}</p>
+              )}
+              {Object.keys(errors).length ? (
+                <p className="text-red-600">
+                  Some item already input value exists but show warning. That
+                  time you can click updated button or try another way.
+                </p>
+              ) : (
+                <></>
               )}
             </div>
             <button type="submit" className="btn">
-              Add a Class
+              Update
             </button>
           </form>
         </>
@@ -175,4 +215,4 @@ const AddClass = () => {
   );
 };
 
-export default AddClass;
+export default UpdateClass;

@@ -20,6 +20,7 @@ import PrivateForStudentRoutes from "./PrivateForStudentRoutes";
 import SelectedClasses from "../pages/Dashboard/Student/SelectedClasses";
 import Payment from "../components/Payment";
 import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
+import UpdateClass from "../pages/Dashboard/Instructor/UpdateClass";
 
 const Routes = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ const Routes = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      // student
       {
         path: "selected-classes",
         element: (
@@ -97,6 +99,14 @@ const Routes = createBrowserRouter([
         element: (
           <PrivateForInstructorRoutes>
             <AddClass />
+          </PrivateForInstructorRoutes>
+        ),
+      },
+      {
+        path: "update-class/:id",
+        element: (
+          <PrivateForInstructorRoutes>
+            <UpdateClass />
           </PrivateForInstructorRoutes>
         ),
       },

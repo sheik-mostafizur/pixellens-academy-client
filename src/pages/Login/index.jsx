@@ -68,7 +68,7 @@ const Login = () => {
                 alt="google"
                 className="inline-block h-8 w-8"
               />
-              Sign in with Google
+              Continue with Google
             </button>
           </div>
           <div className="inline-flex w-full items-center justify-center">

@@ -6,7 +6,7 @@ import useFetchData from "../../../hooks/useFetchData";
 const PopularInstructors = () => {
   const {data: instructors, loading} = useFetchData("/popular-instructors");
   return (
-    <section className="py-8 md:py-24">
+    <section className="py-8 md:py-20">
       <Container>
         <h2 className="mb-6 text-center text-3xl font-bold text-primary-900 md:mb-12 md:text-5xl">
           Popular Instructors
@@ -19,6 +19,7 @@ const PopularInstructors = () => {
               instructors.map((instruct) => {
                 return (
                   <motion.div
+                    whileHover={{scale: 1.10}}
                     variants={{
                       hidden: {opacity: 0, scale: 0.8},
                       visible: {opacity: 1, scale: 1},
