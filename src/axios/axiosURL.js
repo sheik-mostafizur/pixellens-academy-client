@@ -1,21 +1,12 @@
 // api.js
 import axios from "axios";
 
+// https://pixellens-academy.vercel.app/
 const axiosURL = axios.create({
-  baseURL: "http://localhost:3001/",
+  baseURL: "https://pixellens-academy.vercel.app/",
 });
 
 // create axios baseURL for and set headers for access token
 axiosURL.defaults.headers.common["Authorization"] =
   "Bearer " + localStorage.getItem("access-token");
-
-// const temporaryURL = () => {
-//   axiosURL.get("/users", {
-//     headers: {
-//       authorization: "Bearer " + localStorage.getItem("access-token"),
-//     },
-//   });
-// };
-
-// temporaryURL();
 export default axiosURL;
