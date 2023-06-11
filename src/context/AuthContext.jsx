@@ -8,6 +8,7 @@ import {
 import {createContext, useContext, useEffect, useState} from "react";
 import {auth, googleProvider} from "../config/firebase.js";
 import LoaderSpinner from "../components/LoaderSpinner";
+import axiosURL from "../axios/axiosURL.js";
 
 const UserContext = createContext({});
 
@@ -43,6 +44,18 @@ const AuthContext = ({children}) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (res) => {
       res ? setUser(res) : setUser(null);
+      if (res?.email) {
+        axiosURL
+          .post("jwt", {
+            params: {email: res?.email, name: res?.displayName},
+          })
+          .then((response) => {
+            const token = response?.data;
+            localStorage.setItem("access-token", token);
+          });
+      } else {
+        localStorage.removeItem("access-token");
+      }
       // if user is logged in successfully the loading stopped
       setLoading(false);
     });

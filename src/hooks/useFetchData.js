@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import axiosURL from "../axios/axiosURL";
 
 const useFetchData = (url, stateValue = []) => {
@@ -25,7 +25,7 @@ const useFetchData = (url, stateValue = []) => {
     fetchData();
   };
 
-  return { data, loading, refetch };
+  return {data, loading, refetch};
 };
 
 export default useFetchData;
