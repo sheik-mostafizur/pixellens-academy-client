@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosURL = axios.create({
-  baseURL: "http://localhost:3001/",
+  baseURL: "https://pixellens-academy.vercel.app/",
 });
 
 export default axiosURL;
