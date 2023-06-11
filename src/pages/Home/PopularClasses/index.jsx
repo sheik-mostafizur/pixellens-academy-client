@@ -22,7 +22,7 @@ const PopularClasses = () => {
           Popular Classes
         </h2>
         {loading ? <LoaderSpinner /> : ""}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {popularClasses &&
             popularClasses.slice(0,6).map((popularCls) => (
               <ClassCard key={popularCls._id} cls={popularCls} />
