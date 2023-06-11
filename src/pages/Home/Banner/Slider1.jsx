@@ -1,3 +1,5 @@
+import {Fade} from "react-awesome-reveal";
+
 const Slider1 = () => {
   return (
     <div
@@ -9,10 +11,15 @@ const Slider1 = () => {
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-white">
         <div className="max-w-md md:max-w-3xl">
-          <h1 className="text-5xl font-bold lg:text-7xl">
+          <Fade
+            delay={100}
+            duration={500}
+            cascade
+            damping={1e-1}
+            className="text-5xl font-bold  mb-4">
             Hello, Photography Summer Camp
-          </h1>
-          <h2 className="mb-5 mt-2 text-3xl font-bold">
+          </Fade>
+          <h2 className="mb-5 text-3xl font-bold">
             {" "}
             in PixelLens Academy
           </h2>

@@ -15,8 +15,17 @@ const UserContext = createContext({});
 export const uesAuthContext = () => useContext(UserContext);
 
 const AuthContext = ({children}) => {
+  // for theme start
+  const [theme, setTheme] = useState("dark");
+  const handleTheme = () => {
+    document.querySelector("html body").setAttribute("data-theme", theme);
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+  // for theme end
+
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+
   const createUser = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
   };
@@ -47,6 +56,8 @@ const AuthContext = ({children}) => {
     logInUser,
     logInUserWithGoogle,
     logOutUser,
+    handleTheme,
+    theme,
   };
 
   return (

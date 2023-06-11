@@ -66,7 +66,7 @@ const UpdateClass = () => {
             Swal.fire({
               position: "center",
               icon: "success",
-              title: "Updated success",
+              title: "Updated success reviewing admin!",
               showConfirmButton: false,
               timer: 1500,
             });

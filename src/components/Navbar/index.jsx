@@ -6,7 +6,7 @@ import {BsFillCartCheckFill} from "react-icons/bs";
 import useFetchData from "../../hooks/useFetchData";
 
 const Navbar = () => {
-  const {user, logOutUser} = uesAuthContext();
+  const {user, logOutUser, theme, handleTheme} = uesAuthContext();
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
   const {data: carts} = useFetchData(`/carts/${user?.email}`);
@@ -22,14 +22,18 @@ const Navbar = () => {
   const toggleUserDetails = () => {
     setUserDetails(!userDetails);
   };
-  const navItemStyle =
-    "block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-500 dark:hover:bg-primary-700 dark:hover:text-white md:dark:hover:bg-transparent";
+  const navItemStyle = `block py-2 pl-3 pr-4 ${
+    theme == "dark" ? "text-primary-900" : "text-primary-100"
+  }  rounded hover:bg-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-500 dark:hover:bg-primary-700 dark:hover:text-white md:dark:hover:bg-transparent`;
 
   const navItemActiveStyle =
     "block py-2 pl-3 pr-4 text-white bg-primary-700 rounded md:bg-transparent md:text-primary-700 md:p-0 dark:text-white md:dark:text-primary-500";
 
   return (
-    <nav className="left-0 top-0 z-20 w-full bg-primary-50 shadow dark:border-primary-600 dark:bg-primary-900">
+    <nav
+      className={`${
+        theme == "dark" ? "bg-primary-50" : ""
+      } left-0 top-0 z-20 w-full  shadow dark:border-primary-600 dark:bg-primary-900`}>
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4 py-1">
         <Link to="/" className="flex items-center">
           <img
@@ -37,7 +41,7 @@ const Navbar = () => {
             className="mr-3 h-12 md:h-16"
             alt="PixelLens Academy"
           />
-          <span className="self-center whitespace-nowrap md:text-2xl font-semibold dark:text-white">
+          <span className="self-center whitespace-nowrap font-semibold dark:text-white md:text-2xl">
             PixelLensAcademy
           </span>
         </Link>
@@ -62,7 +66,7 @@ const Navbar = () => {
               />
             </button>
             <div
-              // TODO: toggle hidden
+              // toggle hidden
               className={`${
                 userDetails ? "" : "hidden"
               } absolute right-0 top-11 z-50 my-4 list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:divide-gray-600 dark:bg-primary-700`}
@@ -76,6 +80,14 @@ const Navbar = () => {
                 </span>
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">
+                <li className=" flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 dark:text-gray-200 dark:hover:bg-primary-600 dark:hover:text-white">
+                  <span className="capitalize">{theme}</span>
+                  <input
+                    type="checkbox"
+                    onClick={handleTheme}
+                    className="toggle"
+                  />
+                </li>
                 <li>
                   <Link
                     to="/dashboard"
@@ -121,7 +133,10 @@ const Navbar = () => {
             isMobileMenu ? "" : "hidden"
           } w-full items-center justify-between md:order-1 md:flex md:w-auto`}
           id="mobile-menu-2">
-          <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-primary-50 p-4 font-medium dark:border-gray-700 dark:bg-primary-800 md:mt-0 md:flex-row md:items-center md:space-x-8 md:border-0 md:bg-primary-50 md:p-0 md:dark:bg-primary-900">
+          <ul
+            className={`${
+              theme == "dark" ? "bg-primary-50 md:bg-primary-50" : ""
+            } mt-4 flex flex-col rounded-lg border border-gray-100 p-4 font-medium dark:border-gray-700 dark:bg-primary-800 md:mt-0 md:flex-row md:items-center md:space-x-8 md:border-0  md:p-0 md:dark:bg-primary-900`}>
             <li>
               <NavLink
                 to="/"

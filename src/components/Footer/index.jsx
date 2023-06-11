@@ -1,10 +1,12 @@
 import Container from "../Container";
 import {LogoLightMode, footerGallery} from "../../assets/images";
 import SocialLinks from "./SocialLinks";
+import {uesAuthContext} from "../../context/AuthContext";
 
 const Footer = () => {
+  const {theme} = uesAuthContext();
   return (
-    <footer className="bg-primary-50">
+    <footer className={`${theme == "dark" ? "bg-primary-50" : ""}`}>
       <Container>
         <div className="footer p-10 text-base-content">
           <div>

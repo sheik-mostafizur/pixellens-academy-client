@@ -9,7 +9,7 @@ const Slider2 = () => {
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-white">
         <div className="max-w-md md:max-w-3xl">
-          <h1 className="text-5xl font-bold lg:text-7xl">
+          <h1 className="text-5xl font-bold lg:text-7xl mb-4">
             Unlock Your Photographic Vision
           </h1>
           <p className="mb-5">

@@ -16,7 +16,7 @@ const Banner = () => {
     <Swiper
       modules={[Navigation, Autoplay]} // Add Autoplay module
       navigation={true}
-      autoplay={{delay: 3000}} // Set the delay for autoplay in milliseconds
+      autoplay={{delay: 3500}} // Set the delay for autoplay in milliseconds
       className="mySwiper">
       <SwiperSlide>
         <Slider1 />
