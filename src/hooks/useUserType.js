@@ -11,8 +11,13 @@ const useUserType = () => {
     {
       enabled: !loading && user?.email !== undefined, // Added check for undefined email
       queryFn: async () => {
-        const response = await axiosURL.get(`/user-type/${user?.email}`);
-        return response.data.userType;
+        try {
+          const response = await axiosURL.get(`/user-type/${user?.email}`);
+          return response.data.userType;
+        } catch (error) {
+          // Some time user-type url problem, I think when I refresh my website it's solved.
+          window.location.reload();
+        }
       },
     }
   );
