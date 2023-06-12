@@ -1,30 +1,34 @@
 import Container from "../../../components/Container";
-import useFetchData from "../../../hooks/useFetchData";
 import LoaderSpinner from "../../../components/LoaderSpinner";
 import ClassCard from "../../../components/ClassCard";
+import {uesAuthContext} from "../../../context/AuthContext";
+import {useEffect, useState} from "react";
+import axiosURL from "../../../axios/axiosURL";
 
 const PopularClasses = () => {
-  const {data: users} = useFetchData(`/users`);
-  const {data: loadedClasses, loading} = useFetchData("/popular-classes");
-  const popularClasses = loadedClasses.reduce((acc, cls) => {
-    const matchingUser = users.find((user) => user._id === cls.instructorId);
-    if (matchingUser) {
-      cls.instructorName = matchingUser.name;
-      cls.instructorEmail = matchingUser.email;
-    }
-    acc.push(cls);
-    return acc;
-  }, []);
+  const {user} = uesAuthContext();
+  const [isLoading, setIsLoading] = useState(true);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    axiosURL
+      .get("/classes/popular", {params: {email: user?.email}})
+      .then(({data}) => {
+        setCourses(data);
+        setIsLoading(false);
+      });
+  }, [user?.email]);
+
   return (
     <section className="py-8 md:py-20">
       <Container>
         <h2 className="mb-6 text-center text-3xl font-bold text-primary-900 md:mb-12 md:text-5xl">
           Popular Classes
         </h2>
-        {loading ? <LoaderSpinner /> : ""}
+        {isLoading ? <LoaderSpinner /> : ""}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {popularClasses &&
-            popularClasses.slice(0,6).map((popularCls) => (
+          {courses &&
+            courses.map((popularCls) => (
               <ClassCard key={popularCls._id} cls={popularCls} />
             ))}
         </div>

@@ -1,19 +1,21 @@
 import {useState} from "react";
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import {uesAuthContext} from "../../context/AuthContext";
 import {LogoLightMode} from "../../assets/images";
 import {BsFillCartCheckFill} from "react-icons/bs";
-import useFetchData from "../../hooks/useFetchData";
+import useCarts from "../../hooks/useCarts";
 
 const Navbar = () => {
   const {user, logOutUser, theme, handleTheme} = uesAuthContext();
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
-  const {data: carts} = useFetchData(`/carts/${user?.email}`);
-
+  const {carts} = useCarts();
+  const navigate = useNavigate();
   const handleLoggedOut = () => {
     logOutUser()
-      .then(() => {})
+      .then(() => {
+        navigate("/");
+      })
       .catch((error) => console.log(error));
   };
   const toggleMobileMenu = () => {

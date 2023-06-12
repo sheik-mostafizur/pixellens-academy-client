@@ -1,7 +1,7 @@
 // api.js
 import axios from "axios";
 
-// https://pixellens-academy.vercel.app/
+// http://localhost:3001/ // TODO: changeable
 const axiosURL = axios.create({
   baseURL: "https://pixellens-academy.vercel.app/",
 });

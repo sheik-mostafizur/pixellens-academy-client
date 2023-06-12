@@ -1,17 +1,13 @@
 import Swal from "sweetalert2";
 import axiosURL from "../../../../axios/axiosURL";
 import LoaderSpinner from "../../../../components/LoaderSpinner";
-import {uesAuthContext} from "../../../../context/AuthContext";
-import useFetchData from "../../../../hooks/useFetchData";
 import {AiFillDelete} from "react-icons/ai";
 import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet-async";
+import useCarts from "../../../../hooks/useCarts";
 
 const SelectedClasses = () => {
-  const {user} = uesAuthContext();
-  const email = user && user?.email;
-  const {data: carts, loading, refetch} = useFetchData(`/carts/${email}`);
-
+  const {carts, refetch, isLoading} = useCarts();
   // get price in selected carts
   const price = carts.reduce((acc, sum) => {
     acc += sum.price;
@@ -35,7 +31,7 @@ const SelectedClasses = () => {
   if (!carts?.length > 0) {
     return (
       <>
-        {loading ? (
+        {isLoading ? (
           <LoaderSpinner />
         ) : (
           <>
@@ -64,7 +60,7 @@ const SelectedClasses = () => {
           <button className="btn">Pay Now</button>
         </Link>
       </div>
-      {loading ? (
+      {isLoading ? (
         <LoaderSpinner />
       ) : (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

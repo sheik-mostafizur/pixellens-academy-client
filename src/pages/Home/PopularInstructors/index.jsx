@@ -4,7 +4,7 @@ import LoaderSpinner from "../../../components/LoaderSpinner";
 import useFetchData from "../../../hooks/useFetchData";
 
 const PopularInstructors = () => {
-  const {data: instructors, loading} = useFetchData("/popular-instructors");
+  const {data: instructors, loading} = useFetchData("/instructors/popular");
   return (
     <section className="py-8 md:py-20">
       <Container>

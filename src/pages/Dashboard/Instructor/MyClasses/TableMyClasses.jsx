@@ -69,7 +69,7 @@ const TableMyClasses = ({classes}) => {
                 </th>
                 <td className="px-6 py-4">{cls?.feedback}</td>
                 <td className="bg-gray-50 px-6 py-4 dark:bg-gray-800">
-                  <Link to={`/dashboard/update-class/${cls._id}`}>
+                  <Link to={`/dashboard/classes/${cls._id}`}>
                     <button className="btn text-2xl">
                       <BiEdit />
                     </button>

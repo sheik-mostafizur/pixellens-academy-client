@@ -2,20 +2,22 @@ import {Helmet} from "react-helmet-async";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Container from "../../components/Container";
-import useFetchData from "../../hooks/useFetchData";
 import LoaderSpinner from "../../components/LoaderSpinner";
 import ClassCard from "../../components/ClassCard";
+import {uesAuthContext} from "../../context/AuthContext";
+import {useEffect, useState} from "react";
+import axiosURL from "../../axios/axiosURL";
 const Classes = () => {
-  const {data: users} = useFetchData(`/users`);
-  const {data: loadedClasses, loading} = useFetchData(`/classes`);
-  const classData = loadedClasses.reduce((acc, cls) => {
-    const matchingUser = users.find((user) => user._id === cls.instructorId);
-    if (matchingUser) {
-      cls.instructorName = matchingUser.name;
-    }
-    acc.push(cls);
-    return acc;
-  }, []);
+  const {user} = uesAuthContext();
+  const [isLoading, setIsLoading] = useState(true);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    axiosURL.get("/classes", {params: {email: user?.email}}).then(({data}) => {
+      setCourses(data);
+      setIsLoading(false);
+    });
+  }, [user?.email]);
   return (
     <div>
       <Helmet>
@@ -25,12 +27,12 @@ const Classes = () => {
         <Navbar />
       </header>
       <Container>
-        {loading ? (
+        {isLoading ? (
           <LoaderSpinner />
         ) : (
           <div className="my-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {classData &&
-              classData.map((cls) => <ClassCard key={cls._id} cls={cls} />)}
+            {courses &&
+              courses.map((cls) => <ClassCard key={cls._id} cls={cls} />)}
           </div>
         )}
       </Container>

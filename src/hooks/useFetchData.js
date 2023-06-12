@@ -1,13 +1,13 @@
 import {useCallback, useEffect, useState} from "react";
 import axiosURL from "../axios/axiosURL";
 
-const useFetchData = (url, stateValue = []) => {
+const useFetchData = (url, stateValue = [], query = {}) => {
   const [data, setData] = useState(stateValue);
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await axiosURL.get(url);
+      const response = await axiosURL.get(url, {params: query});
       setData(response.data);
       setLoading(false);
     } catch (error) {

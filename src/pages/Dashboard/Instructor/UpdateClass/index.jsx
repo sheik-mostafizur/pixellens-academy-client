@@ -12,7 +12,7 @@ const imgHostingToken = import.meta.env.VITE_Image_Upload_token;
 
 const UpdateClass = () => {
   const {id} = useParams();
-  const {data: prevData, refetch} = useFetchData(`/update-class/${id}`);
+  const {data: prevData, refetch} = useFetchData(`/classes/${id}`);
 
   const [userFromDB, setUserFromDB] = useState({});
   const {user} = uesAuthContext();
@@ -38,7 +38,7 @@ const UpdateClass = () => {
 
     if (prevData?.imageURL !== "") {
       return axiosURL
-        .patch(`/update-class/${prevData?._id}`, data)
+        .patch(`/classes/${prevData?._id}`, data)
         .then(({data}) => {
           if (data?.modifiedCount) {
             Swal.fire({
@@ -63,7 +63,7 @@ const UpdateClass = () => {
         if (imgResponse.success) {
           data.imageURL = imgResponse.data.display_url;
           prevData.imageURL = data.imageURL;
-          axiosURL.patch(`/update-class/${prevData?._id}`, data).then(() => {
+          axiosURL.patch(`/classes/${prevData?._id}`, data).then(() => {
             Swal.fire({
               position: "center",
               icon: "success",

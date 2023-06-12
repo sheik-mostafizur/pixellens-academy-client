@@ -103,7 +103,7 @@ const Routes = createBrowserRouter([
         ),
       },
       {
-        path: "update-class/:id",
+        path: "classes/:id",
         element: (
           <PrivateForInstructorRoutes>
             <UpdateClass />
