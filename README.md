@@ -1,12 +1,12 @@
-## b712-summer-camp-client-side-sheik-mostafizur
+## Pixellens-Academy-sheik-mostafizur
 
 # PixelLens Academy
 
 **Live Link:** [Goto Website!](https://pixellens-academy.web.app/)
 
-**Client Side:** [Goto Github!](https://github.com/programming-hero-web-course1/b712-summer-camp-client-side-sheik-mostafizur.git)
+**Client Side:** [Goto Github!](https://github.com/sheik-mostafizur/pixellens-academy-client.git)
 
-**Server Side:** [Goto Github!](https://github.com/programming-hero-web-course1/b7a12-summer-camp-server_side-sheik-mostafizur.git)
+**Server Side:** [Goto Github!](https://github.com/sheik-mostafizur/pixellens-academy-server.git)
 
 # PixlLens Academy
 
